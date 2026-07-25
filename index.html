@@ -2,509 +2,458 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ProBike Workshop - Bengkel Sepeda Terpercaya Kediri</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Bengkel sepeda profesional di Kediri, layanan servis lengkap, perbaikan, modifikasi, suku cadang asli. Pesan mudah lewat WhatsApp Business, bergaransi resmi!">
-    <meta name="keywords" content="bengkel sepeda kediri, servis sepeda kediri, perbaikan sepeda, modifikasi sepeda, suku cadang sepeda, servis mtb, servis sepeda lipat">
-    <meta name="author" content="ProBike Workshop">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Font & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #25d366;
-            --success: #16a34a;
-            --danger: #dc2626;
-            --warning: #f59e0b;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #94a3b8;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmani Bike - Bengkel Servis Sepeda Terpercaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7A45',
+                        success: '#25D366',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: '#1E293B',
+                        soft: '#F8FAFC'
+                    }
+                }
+            }
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            color: var(--dark);
-            background: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-            z-index: 999;
-        }
-        
-        .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-        }
-        
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            white-space: nowrap;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
-        .btn-wa { background: var(--secondary); color: white; }
-        .btn-wa:hover { background: #128c7e; }
-        .btn-small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
-        .btn-logout { background: var(--danger); color: white; }
-        .btn-success { background: var(--success); color: white; }
-        
-        .menu-toggle { display: none; font-size: 1.6rem; cursor: pointer; color: var(--dark); }
-        
-        /* Hero Section */
-        .hero {
-            padding: 120px 0 60px;
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-            color: white;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        
-        .hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 1rem; line-height: 1.3; }
-        .hero p { font-size: clamp(1rem, 2.5vw, 1.2rem); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        
-        /* Section Umum */
-        .section { padding: clamp(40px, 8vw, 80px) 0; }
-        .section-title { text-align: center; font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: clamp(30px, 6vw, 50px); color: var(--dark); }
-        
-        /* Layanan & Harga */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(20px, 4vw, 30px); }
-        .service-card { background: white; padding: clamp(20px, 5vw, 30px); border-radius: 12px; box-shadow: var(--shadow); text-align: center; transition: transform 0.3s; }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-icon { width: 60px; height: 60px; border-radius: 50%; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; color: var(--primary); }
-        .service-card h3 { margin-bottom: 0.8rem; font-size: 1.2rem; color: var(--dark); }
-        .service-card p { font-size: 0.95rem; color: #475569; }
-        .harga-tag { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-top: 1rem; display: inline-block; }
-        
-        /* Form Pemesanan */
-        .booking { background: #f1f5f9; }
-        .form-wrapper { max-width: 700px; margin: 0 auto; background: white; padding: clamp(20px, 5vw, 30px); border-radius: 12px; box-shadow: var(--shadow); }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; background: white; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        
-        /* Footer */
-        footer { background: var(--dark); color: white; padding: clamp(30px, 7vw, 60px) 0 20px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(20px, 5vw, 30px); margin-bottom: 30px; }
-        .footer-col h4 { margin-bottom: 1rem; color: var(--secondary); font-size: 1.1rem; }
-        .footer-col p, .footer-col a { color: var(--gray); text-decoration: none; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
-        .footer-col a:hover { color: white; }
-        .copyright { text-align: center; padding-top: 1.5rem; border-top: 1px solid #334155; color: var(--gray); font-size: 0.85rem; }
-        
-        /* Tombol WA Melayang */
-        .floating-wa { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 998; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-        
-        /* Modal Panel Admin */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; overflow-y: auto; padding: 20px 0; }
-        .modal-content { max-width: 900px; width: 95%; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--gray); transition: color 0.3s; }
-        .close-modal:hover { color: var(--danger); }
-        .modal-body { padding: 2rem; }
-        .login-box { max-width: 400px; margin: 50px auto; padding: 2rem; text-align: center; }
-        .login-box h2 { margin-bottom: 1rem; color: var(--dark); }
-        .info-login { background: #e0f2fe; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: left; font-size: 0.9rem; border-left: 4px solid var(--primary); }
-        .error { color: var(--danger); margin: 1rem 0; display: none; font-weight: 500; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
-        .admin-header h2 { font-size: 1.5rem; color: var(--dark); }
-        .card { background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; }
-        .card h3 { margin-bottom: 1rem; font-size: 1.2rem; }
-        .form-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        th { background: var(--primary); color: white; }
-        .aksi { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .btn-edit { background: var(--warning); color: white; }
-        .btn-hapus { background: var(--danger); color: white; }
-        
-        /* Responsif */
-        @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            .nav-links { position: fixed; top: 60px; left: -100%; flex-direction: column; background: white; width: 100%; padding: 20px; gap: 1.2rem; box-shadow: var(--shadow); transition: left 0.3s ease; }
-            .nav-links.active { left: 0; }
-            .nav-links a { font-size: 1rem; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
-            .btn-wa.d-none-md { display: none; }
-            .form-row { grid-template-columns: 1fr; }
-            table { display: block; overflow-x: auto; }
-            .modal-body { padding: 1.5rem; }
-        }
-        @media (max-width: 480px) {
-            .container { padding: 0 12px; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            .floating-wa { width: 50px; height: 50px; font-size: 1.3rem; bottom: 15px; right: 15px; }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .transition-custom { transition: all 0.3s ease; }
+            .section-padding { padding: 5rem 1.5rem; }
+            .card-hover { @apply transition-custom hover:shadow-xl hover:-translate-y-1; }
+            .form-input { @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom; }
+            .bg-bike-overlay { background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed; }
+            .bg-bike-dark { background: linear-gradient(rgba(20,30,48,0.9), rgba(20,30,48,0.9)), url('https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat; }
+            .bg-bike-light { background: linear-gradient(rgba(248,250,252,0.9), rgba(248,250,252,0.9)), url('https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat; }
+            .sidebar-item { @apply flex items-center gap-3 p-3 rounded-xl text-gray-600 hover:bg-primary/10 hover:text-primary transition-custom; }
+            .sidebar-item.active { @apply bg-primary/10 text-primary font-medium; }
+            .btn { @apply px-4 py-2 rounded-lg font-medium transition-custom flex items-center gap-2; }
+            .btn-primary { @apply bg-primary text-white hover:bg-primary/90; }
+            .btn-success { @apply bg-success text-white hover:bg-green-600; }
+            .btn-warning { @apply bg-warning text-white hover:bg-amber-600; }
+            .btn-danger { @apply bg-danger text-white hover:bg-red-600; }
+            .btn-secondary { @apply bg-gray-100 text-gray-700 hover:bg-gray-200; }
+            html { scroll-behavior: smooth; }
         }
     </style>
 </head>
-<body>
+<body class="font-sans text-dark">
 
-    <!-- Header -->
-    <header>
-        <div class="container nav-wrapper">
-            <a href="#" class="logo">Pro<span>Bike</span> Workshop</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#beranda">Beranda</a></li>
-                <li><a href="#layanan">Layanan</a></li>
-                <li><a href="#harga">Daftar Harga</a></li>
-                <li><a href="#pesan">Pesan Servis</a></li>
-                <li><a href="#kontak">Kontak</a></li>
-                <li><a href="#" onclick="bukaAdmin(event)">🔧 Admin</a></li>
-            </ul>
-            <a href="https://wa.me/6281234567890?text=Halo%20ProBike%2C%20saya%20ingin%20bertanya" class="btn btn-wa d-none-md">
-                <i class="fab fa-whatsapp"></i> Hubungi
-            </a>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+<!-- TOMBOL ADMIN -->
+<button onclick="bukaPanelAdmin()" id="btnAdmin" class="fixed bottom-5 right-5 bg-primary text-white px-4 py-2 rounded-full shadow-lg z-50 hidden items-center gap-2">
+    <i class="fa fa-cog"></i> Admin
+</button>
+
+<!-- MODAL LOGIN -->
+<div id="modalLogin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-7">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fa fa-lock text-2xl text-primary"></i>
             </div>
+            <h2 class="text-2xl font-bold">Login Admin</h2>
+            <p class="text-gray-500 text-sm mt-1">Pengaturan Website</p>
         </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero" id="beranda">
-        <div class="container">
-            <h1>Layanan Servis Sepeda Standar Internasional</h1>
-            <p>Perawatan, perbaikan, dan modifikasi semua jenis sepeda di Kediri. Teknisi berpengalaman, suku cadang asli, dan garansi resmi.</p>
-            <div class="hero-buttons">
-                <a href="#pesan" class="btn btn-primary">Pesan Servis Sekarang</a>
-                <a href="https://wa.me/6281234567890?text=Halo%20ProBike%2C%20saya%20ingin%20memesan%20servis" class="btn btn-wa">
-                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
-                </a>
+        <div class="space-y-4">
+            <div>
+                <label class="text-sm font-medium text-gray-700 mb-1.5 block">Username</label>
+                <input type="text" id="userLogin" class="form-input" placeholder="Masukkan username">
             </div>
-        </div>
-    </section>
-
-    <!-- Layanan -->
-    <section class="section" id="layanan">
-        <div class="container">
-            <h2 class="section-title">Layanan Kami</h2>
-            <div class="services-grid">
-                <div class="service-card"><div class="service-icon"><i class="fas fa-tools"></i></div><h3>Servis Rutin</h3><p>Pembersihan lengkap, pelumasan, pengecekan rem & gir.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-wrench"></i></div><h3>Perbaikan Kerusakan</h3><p>Perbaikan berat, penggantian komponen rusak.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-bolt"></i></div><h3>Modifikasi & Upgrade</h3><p>Peningkatan performa sepeda Anda.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-shopping-basket"></i></div><h3>Suku Cadang Asli</h3><p>Komponen berkualitas semua merek.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-truck"></i></div><h3>Jemput & Antar</h3><p>Layanan area Kediri kota.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-shield-alt"></i></div><h3>Garansi Servis</h3><p>Jaminan kualitas pekerjaan.</p></div>
+            <div>
+                <label class="text-sm font-medium text-gray-700 mb-1.5 block">Password</label>
+                <input type="password" id="passLogin" class="form-input" placeholder="Masukkan password">
             </div>
+            <p id="pesanSalah" class="text-danger text-sm hidden text-center">
+                <i class="fa fa-exclamation-circle mr-1"></i> Username atau password salah!
+            </p>
+            <button onclick="prosesLogin()" class="btn btn-primary w-full justify-center">Masuk</button>
+            <button onclick="tutupLogin()" class="btn btn-secondary w-full justify-center mt-2">Kembali</button>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Daftar Harga -->
-    <section class="section booking" id="harga">
-        <div class="container">
-            <h2 class="section-title">Daftar Harga Layanan</h2>
-            <div class="services-grid" id="daftarHarga"></div>
-        </div>
-    </section>
-
-    <!-- Form Pemesanan -->
-    <section class="section" id="pesan">
-        <div class="container">
-            <h2 class="section-title">Pesan Layanan Servis</h2>
-            <div class="form-wrapper">
-                <form id="bookingForm">
-                    <div class="form-group"><label>Nama Lengkap *</label><input type="text" id="nama" required placeholder="Nama Anda"></div>
-                    <div class="form-group"><label>Nomor WhatsApp *</label><input type="tel" id="hp" required placeholder="0812xxxx"></div>
-                    <div class="form-group"><label>Jenis Sepeda *</label><select id="jenisSepeda" required>
-                        <option value="">Pilih jenis</option>
-                        <option value="Sepeda Gunung">Sepeda Gunung / MTB</option>
-                        <option value="Sepeda Lipat">Sepeda Lipat</option>
-                        <option value="Sepeda Balap">Sepeda Balap</option>
-                        <option value="Sepeda Lainnya">Lainnya</option>
-                    </select></div>
-                    <div class="form-group"><label>Keterangan Tambahan</label><textarea id="keterangan" rows="3" placeholder="Jelaskan kebutuhan Anda"></textarea></div>
-                    <button type="submit" class="btn btn-primary" style="width:100%">Kirim Pesanan ke WhatsApp</button>
-                </form>
+<!-- PANEL ADMIN -->
+<div id="panelAdmin" class="fixed inset-0 bg-white z-[90] hidden overflow-y-auto">
+    <div class="h-full flex flex-col md:flex-row">
+        <aside class="w-full md:w-64 bg-gray-50 border-r border-gray-100 flex-shrink-0">
+            <div class="p-5 border-b border-gray-100">
+                <h3 class="text-xl font-bold text-primary">Pengaturan</h3>
+                <p class="text-xs text-gray-500">Kelola Isi Website</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="kontak">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col"><h4>ProBike Workshop</h4><p>Bengkel sepeda profesional standar internasional di Kediri.</p></div>
-                <div class="footer-col"><h4>Kontak</h4><a href="tel:+6281234567890"><i class="fas fa-phone"></i> +62 812-3456-7890</a><a href="https://wa.me/6281234567890"><i class="fab fa-whatsapp"></i> WhatsApp</a><p><i class="fas fa-map-marker-alt"></i> Kediri</p></div>
-                <div class="footer-col"><h4>Tautan</h4><a href="#beranda">Beranda</a><a href="#layanan">Layanan</a><a href="#harga">Harga</a></div>
+            <nav class="p-4 space-y-1">
+                <button onclick="gantiHalaman('dashboard')" class="sidebar-item active w-full text-left">
+                    <i class="fa fa-home w-5"></i> Dashboard
+                </button>
+                <button onclick="gantiHalaman('identitas')" class="sidebar-item w-full text-left">
+                    <i class="fa fa-building w-5"></i> Identitas Website
+                </button>
+                <button onclick="gantiHalaman('layanan')" class="sidebar-item w-full text-left">
+                    <i class="fa fa-list-alt w-5"></i> Data Layanan
+                </button>
+                <button onclick="gantiHalaman('tentang')" class="sidebar-item w-full text-left">
+                    <i class="fa fa-info-circle w-5"></i> Tentang Kami
+                </button>
+                <button onclick="gantiHalaman('kontak')" class="sidebar-item w-full text-left">
+                    <i class="fa fa-whatsapp w-5"></i> Kontak & Sosmed
+                </button>
+                <button onclick="gantiHalaman('akun')" class="sidebar-item w-full text-left">
+                    <i class="fa fa-user-circle w-5"></i> Akun Admin
+                </button>
+                <hr class="border-gray-200 my-4">
+                <button onclick="keluar()" class="sidebar-item w-full text-left text-danger hover:text-danger hover:bg-danger/10">
+                    <i class="fa fa-sign-out w-5"></i> Keluar
+                </button>
+            </nav>
+        </aside>
+        <main class="flex-1 p-5">
+            <div class="flex justify-between items-center mb-6">
+                <h1 id="judulHalaman" class="text-xl font-bold">Dashboard</h1>
+                <button onclick="tutupPanelAdmin()" class="btn btn-secondary text-sm">
+                    <i class="fa fa-arrow-left"></i> Kembali ke Website
+                </button>
             </div>
-            <div class="copyright">&copy; 2026 ProBike Workshop</div>
-        </div>
-    </footer>
 
-    <!-- Tombol WA Melayang -->
-    <a href="https://wa.me/6281234567890" class="floating-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
-    <!-- Modal Admin -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="tutupAdmin()">&times;</span>
-            <div class="modal-body">
-                <div id="loginPage">
-                    <div class="login-box">
-                        <h2>🔐 Login Panel Admin</h2>
-                        <div class="info-login">
-                            <strong>Data Login:</strong><br>
-                            Username: <code>admin</code><br>
-                            Password: <code>123456</code>
-                        </div>
-                        <div class="error" id="errorMsg">❌ Username atau Password salah!</div>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" id="username" placeholder="Masukkan username" autocomplete="username">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
-                        </div>
-                        <button class="btn btn-primary" onclick="login()">Masuk Sekarang</button>
+            <div id="halamanDashboard" class="halaman">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border">
+                        <p class="text-gray-500 text-sm">Total Layanan</p>
+                        <p id="jmlLayanan" class="text-3xl font-bold mt-1">0</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border">
+                        <p class="text-gray-500 text-sm">Status Website</p>
+                        <p class="text-success font-semibold mt-1">Aktif</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border">
+                        <p class="text-gray-500 text-sm">Update Terakhir</p>
+                        <p id="tglUpdate" class="text-sm mt-1">-</p>
                     </div>
                 </div>
+            </div>
 
-                <div id="adminPage" style="display:none;">
-                    <div class="admin-header">
-                        <h2>⚙️ Kelola Daftar Harga</h2>
-                        <button class="btn btn-logout btn-small" onclick="logout()">Keluar</button>
-                    </div>
-                    <div class="card">
-                        <h3 id="formTitle">Tambah Layanan Baru</h3>
-                        <form id="hargaForm">
-                            <input type="hidden" id="editId">
-                            <div class="form-row">
-                                <div class="form-group"><label>Nama Layanan</label><input type="text" id="namaLayanan" required></div>
-                                <div class="form-group"><label>Kategori</label><input type="text" id="kategori" required></div>
-                                <div class="form-group"><label>Harga (Rp)</label><input type="number" id="harga" required></div>
-                            </div>
-                            <button type="submit" class="btn btn-success">💾 Simpan</button>
-                        </form>
-                    </div>
-                    <div class="card">
-                        <h3>Daftar Harga</h3>
-                        <table><thead><tr><th>No</th><th>Layanan</th><th>Kategori</th><th>Harga</th><th>Aksi</th></tr></thead><tbody id="tabelHarga"></tbody></table>
+            <div id="halamanIdentitas" class="halaman hidden">
+                <div class="bg-white p-5 rounded-xl shadow-sm border max-w-2xl">
+                    <h3 class="font-bold mb-4">Identitas Website</h3>
+                    <div class="space-y-4">
+                        <div><label class="text-sm font-medium mb-1 block">Nama Bengkel</label><input type="text" id="namaWebsite" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Slogan Utama</label><input type="text" id="sloganWebsite" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Deskripsi Beranda</label><textarea id="deskripsiUtama" class="form-input" rows="3"></textarea></div>
+                        <button onclick="simpanIdentitas()" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
+            </div>
+
+            <div id="halamanLayanan" class="halaman hidden">
+                <div class="flex justify-between items-center mb-5">
+                    <p class="text-gray-500 text-sm">Kelola layanan yang ditampilkan</p>
+                    <button onclick="bukaFormLayanan()" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Tambah Layanan
+                    </button>
+                </div>
+                <div id="formLayanan" class="bg-white p-5 rounded-xl shadow-sm border mb-5 hidden">
+                    <h3 id="judulFormLayanan" class="font-bold mb-4">Tambah Layanan</h3>
+                    <div class="space-y-4">
+                        <div><label class="text-sm font-medium mb-1 block">Nama Layanan</label><input type="text" id="inpNamaLayanan" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Deskripsi</label><textarea id="inpDeskripsiLayanan" class="form-input" rows="2"></textarea></div>
+                        <div><label class="text-sm font-medium mb-1 block">Harga</label><input type="text" id="inpHargaLayanan" class="form-input"></div>
+                        <div class="flex gap-3">
+                            <button onclick="simpanLayanan()" class="btn btn-success">Simpan</button>
+                            <button onclick="tutupFormLayanan()" class="btn btn-secondary">Batal</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="p-3 text-left text-sm">No</th>
+                                    <th class="p-3 text-left text-sm">Nama</th>
+                                    <th class="p-3 text-left text-sm">Harga</th>
+                                    <th class="p-3 text-center text-sm">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelLayanan"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="halamanTentang" class="halaman hidden">
+                <div class="bg-white p-5 rounded-xl shadow-sm border max-w-2xl">
+                    <h3 class="font-bold mb-4">Halaman Tentang</h3>
+                    <div class="space-y-4">
+                        <div><label class="text-sm font-medium mb-1 block">Judul</label><input type="text" id="judulTentang" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Isi Deskripsi</label><textarea id="isiTentang" class="form-input" rows="5"></textarea></div>
+                        <button onclick="simpanTentang()" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="halamanKontak" class="halaman hidden">
+                <div class="bg-white p-5 rounded-xl shadow-sm border max-w-2xl space-y-4">
+                    <h3 class="font-bold">Info Kontak</h3>
+                    <div><label class="text-sm font-medium mb-1 block">Alamat</label><textarea id="alamatLengkap" class="form-input" rows="2"></textarea></div>
+                    <div><label class="text-sm font-medium mb-1 block">Jam Buka</label><input type="text" id="jamOperasional" class="form-input"></div>
+                    <div><label class="text-sm font-medium mb-1 block">Nomor WhatsApp (awalan 08)</label><input type="text" id="nomorWa" class="form-input" placeholder="Contoh: 081234567890"></div>
+                    <button onclick="simpanKontak()" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+
+            <div id="halamanAkun" class="halaman hidden">
+                <div class="bg-white p-5 rounded-xl shadow-sm border max-w-md">
+                    <h3 class="font-bold mb-4">Ubah Akun</h3>
+                    <div class="space-y-4">
+                        <div><label class="text-sm font-medium mb-1 block">Username Baru</label><input type="text" id="userBaru" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Password Baru</label><input type="password" id="passBaru" class="form-input"></div>
+                        <div><label class="text-sm font-medium mb-1 block">Ulangi Password</label><input type="password" id="ulangPass" class="form-input"></div>
+                        <button onclick="ubahAkun()" class="btn btn-primary">Perbarui</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="#beranda" id="logoNavbar" class="text-2xl font-bold text-primary">Harmani Bike</a>
+        <nav class="hidden md:flex space-x-8">
+            <a href="#beranda" class="font-medium hover:text-primary transition-custom">Beranda</a>
+            <a href="#tentang" class="font-medium hover:text-primary transition-custom">Tentang</a>
+            <a href="#layanan" class="font-medium hover:text-primary transition-custom">Layanan</a>
+            <a href="#pesan" class="font-medium hover:text-primary transition-custom">Pesan Servis</a>
+            <a href="#kontak" class="font-medium hover:text-primary transition-custom">Kontak</a>
+        </nav>
+        <div class="flex items-center gap-3">
+            <button onclick="bukaLogin()" class="text-sm text-gray-600 hover:text-primary hidden md:block">Admin</button>
+            <a href="#pesan" class="hidden md:block btn btn-primary">Pesan Servis</a>
+            <button onclick="toggleMenuMobile()" class="md:hidden text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    <div id="menuMobile" class="hidden md:hidden bg-white/98 backdrop-blur-sm border-t">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+            <a href="#beranda" onclick="tutupMenuMobile()" class="font-medium py-2">Beranda</a>
+            <a href="#tentang" onclick="tutupMenuMobile()" class="font-medium py-2">Tentang</a>
+            <a href="#layanan" onclick="tutupMenuMobile()" class="font-medium py-2">Layanan</a>
+            <a href="#pesan" onclick="tutupMenuMobile()" class="font-medium py-2">Pesan Servis</a>
+            <a href="#kontak" onclick="tutupMenuMobile()" class="font-medium py-2">Kontak</a>
+            <button onclick="bukaLogin(); tutupMenuMobile();" class="text-left py-2 text-gray-600">Login Admin</button>
+            <a href="#pesan" onclick="tutupMenuMobile()" class="btn btn-primary justify-center">Pesan Servis</a>
+        </div>
+    </div>
+</header>
+
+<!-- BERANDA -->
+<section id="beranda" class="bg-bike-overlay section-padding">
+    <div class="container mx-auto flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2">
+            <h1 id="judulUtama" class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight text-shadow mb-4">Sepeda Lebih Baik untuk Perjalananmu</h1>
+            <p id="deskripsiBeranda" class="text-lg text-gray-700 mb-8 max-w-xl">Layanan servis sepeda profesional di Kediri</p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#pesan" class="btn btn-primary">Hubungi Kami</a>
+                <a href="#layanan" class="btn btn-secondary border border-primary text-primary">Lihat Layanan</a>
+            </div>
+        </div>
+        <div class="md:w-1/2">
+            <div class="relative">
+                <div class="absolute -inset-4 bg-primary/10 rounded-3xl -rotate-3"></div>
+                <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Servis Sepeda" class="relative rounded-2xl shadow-lg w-full object-cover h-64 md:h-80">
             </div>
         </div>
     </div>
+</section>
+
+<section id="tentang" class="bg-bike-light section-padding">
+    <div class="container mx-auto px-4 text-center">
+        <h2 id="judulTentangWeb" class="text-2xl font-bold mb-4">Tentang Kami</h2>
+        <p id="isiTentangWeb" class="text-gray-600 max-w-2xl mx-auto">Bengkel servis sepeda terpercaya</p>
+    </div>
+</section>
+
+<section id="layanan" class="bg-white section-padding">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-2xl font-bold mb-8">Layanan Kami</h2>
+        <div id="daftarLayananWeb" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+</section>
+
+<section id="pesan" class="bg-bike-overlay section-padding">
+    <div class="container mx-auto px-4 max-w-md text-center">
+        <div class="bg-white/98 p-8 rounded-xl shadow-lg">
+            <h2 class="text-xl font-bold mb-4">Pesan Servis</h2>
+            <p class="text-gray-600 mb-6">Klik tombol di bawah untuk langsung menghubungi via WhatsApp</p>
+            <a id="linkWaPesan" target="_blank" rel="noopener noreferrer" class="btn btn-success text-lg px-8 py-3 w-full justify-center">
+                <i class="fa fa-whatsapp mr-2"></i> Hubungi Sekarang
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer id="kontak" class="bg-bike-dark text-white section-padding">
+    <div class="container mx-auto px-4 text-center">
+        <h3 id="namaFooter" class="text-xl font-bold mb-3">Harmani Bike</h3>
+        <p id="alamatFooter" class="text-gray-300">Jl. Sepeda Sehat No.123, Kediri</p>
+        <p id="jamFooter" class="text-gray-300 mt-2">Buka Senin - Sabtu 08.00 - 17.00</p>
+        <p id="waFooter" class="text-gray-300 mt-2">📞 0852-3131-2055</p>
+    </div>
+</footer>
 
 <script>
-// ==================== DATA LOGIN (PASTIKAN SESUAI) ====================
-const USER_VALID = "admin";
-const PASS_VALID = "123456";
-const NO_WA = "6281234567890";
-
-// ==================== DATA AWAL ====================
-let daftarHarga = JSON.parse(localStorage.getItem('daftarHarga')) || [
-    { id:1, nama:"Servis Rutin Lengkap", kategori:"Servis Dasar", harga:75000 },
-    { id:2, nama:"Servis Rantai & Gir", kategori:"Servis Ringan", harga:35000 },
-    { id:3, nama:"Perbaikan Rem", kategori:"Perbaikan", harga:45000 },
-    { id:4, nama:"Tune Up Performa", kategori:"Upgrade", harga:120000 },
-    { id:5, nama:"Full Servis Overhaul", kategori:"Servis Utama", harga:180000 }
+let editIndexLayanan = null;
+let akun = JSON.parse(localStorage.getItem('akunAdmin')) || { username: 'admin', password: 'harmani123' };
+let pengaturan = JSON.parse(localStorage.getItem('pengaturanWeb')) || {
+    nama: 'Harmani Bike', slogan: 'Sepeda Lebih Baik untuk Perjalananmu', deskripsiUtama: 'Layanan servis sepeda profesional di Kediri',
+    judulTentang: 'Tentang Kami', isiTentang: 'Bengkel servis sepeda terpercaya di Kediri',
+    alamat: 'Jl. Sepeda Sehat No. 123, Kota Kediri', jam: 'Senin - Sabtu 08.00 - 17.00 WIB', wa: '085231312055'
+};
+let layanan = JSON.parse(localStorage.getItem('dataLayanan')) || [
+    { nama: 'Servis Ringan', deskripsi: 'Stel rem & gigi, bersih rantai', harga: 'Mulai Rp 35.000' },
+    { nama: 'Servis Lengkap', deskripsi: 'Bongkar bersih & pelumas penuh', harga: 'Mulai Rp 75.000' }
 ];
 
-// ==================== INISIALISASI ====================
+function toggleMenuMobile() { document.getElementById('menuMobile').classList.toggle('hidden'); }
+function tutupMenuMobile() { document.getElementById('menuMobile').classList.add('hidden'); }
+
+function bukaLogin() { document.getElementById('modalLogin').classList.remove('hidden'); }
+function tutupLogin() { document.getElementById('modalLogin').classList.add('hidden'); }
+function prosesLogin() {
+    const u = document.getElementById('userLogin').value.trim();
+    const p = document.getElementById('passLogin').value.trim();
+    if(u === akun.username && p === akun.password) {
+        tutupLogin();
+        document.getElementById('btnAdmin').classList.remove('hidden');
+        localStorage.setItem('statusLogin', 'sukses');
+    } else {
+        document.getElementById('pesanSalah').classList.remove('hidden');
+    }
+}
+
+function buatLinkWa(nomor) {
+    const bersih = nomor.replace(/\D/g,'').replace(/^0+/,'');
+    return `https://wa.me/62${bersih}`;
+}
+
+function terapkanSemuaPengaturan() {
+    document.getElementById('logoNavbar').textContent = pengaturan.nama;
+    document.getElementById('judulUtama').textContent = pengaturan.slogan;
+    document.getElementById('deskripsiBeranda').textContent = pengaturan.deskripsiUtama;
+    document.getElementById('judulTentangWeb').textContent = pengaturan.judulTentang;
+    document.getElementById('isiTentangWeb').textContent = pengaturan.isiTentang;
+    document.getElementById('namaFooter').textContent = pengaturan.nama;
+    document.getElementById('alamatFooter').textContent = pengaturan.alamat;
+    document.getElementById('jamFooter').textContent = 'Buka: ' + pengaturan.jam;
+    document.getElementById('waFooter').textContent = '📞 ' + pengaturan.wa;
+    document.getElementById('linkWaPesan').href = buatLinkWa(pengaturan.wa);
+    
+    document.getElementById('namaWebsite').value = pengaturan.nama;
+    document.getElementById('sloganWebsite').value = pengaturan.slogan;
+    document.getElementById('deskripsiUtama').value = pengaturan.deskripsiUtama;
+    document.getElementById('judulTentang').value = pengaturan.judulTentang;
+    document.getElementById('isiTentang').value = pengaturan.isiTentang;
+    document.getElementById('alamatLengkap').value = pengaturan.alamat;
+    document.getElementById('jamOperasional').value = pengaturan.jam;
+    document.getElementById('nomorWa').value = pengaturan.wa;
+    
+    document.getElementById('jmlLayanan').textContent = layanan.length;
+    document.getElementById('tglUpdate').textContent = new Date().toLocaleString('id-ID');
+    tampilkanTabelLayanan();
+    tampilkanLayananKeWeb();
+}
+
 window.onload = () => {
-    tampilkanHargaWebsite();
-    tampilkanTabelAdmin();
-    if(localStorage.getItem('sudahLogin') === 'ya') tampilkanPanelAdmin();
+    if(localStorage.getItem('statusLogin') === 'sukses') document.getElementById('btnAdmin').classList.remove('hidden');
+    terapkanSemuaPengaturan();
 };
 
-// Menu Mobile
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+function bukaPanelAdmin() { document.getElementById('panelAdmin').classList.remove('hidden'); }
+function tutupPanelAdmin() { document.getElementById('panelAdmin').classList.add('hidden'); }
+function keluar() {
+    localStorage.removeItem('statusLogin');
+    tutupPanelAdmin();
+    document.getElementById('btnAdmin').classList.add('hidden');
+}
+function gantiHalaman(nama) {
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    event.target.closest('.sidebar-item').classList.add('active');
+    document.querySelectorAll('.halaman').forEach(h => h.classList.add('hidden'));
+    document.getElementById('halaman'+nama.charAt(0).toUpperCase()+nama.slice(1)).classList.remove('hidden');
+    document.getElementById('judulHalaman').textContent = nama.charAt(0).toUpperCase()+nama.slice(1);
+}
 
-// Form Pesan WA
-document.getElementById('bookingForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const pesan = `Halo, mau pesan servis:\nNama: ${document.getElementById('nama').value}\nHP: ${document.getElementById('hp').value}\nSepeda: ${document.getElementById('jenisSepeda').value}\nKeterangan: ${document.getElementById('keterangan').value || '-'}`;
-    window.open(`https://wa.me/${NO_WA}?text=${encodeURIComponent(pesan)}`);
-});
+function simpanPengaturan() { localStorage.setItem('pengaturanWeb', JSON.stringify(pengaturan)); }
+function simpanIdentitas() {
+    pengaturan.nama = document.getElementById('namaWebsite').value.trim();
+    pengaturan.slogan = document.getElementById('sloganWebsite').value.trim();
+    pengaturan.deskripsiUtama = document.getElementById('deskripsiUtama').value.trim();
+    simpanPengaturan(); terapkanSemuaPengaturan(); alert('Tersimpan!');
+}
+function simpanTentang() {
+    pengaturan.judulTentang = document.getElementById('judulTentang').value.trim();
+    pengaturan.isiTentang = document.getElementById('isiTentang').value.trim();
+    simpanPengaturan(); terapkanSemuaPengaturan(); alert('Tersimpan!');
+}
+function simpanKontak() {
+    pengaturan.alamat = document.getElementById('alamatLengkap').value.trim();
+    pengaturan.jam = document.getElementById('jamOperasional').value.trim();
+    pengaturan.wa = document.getElementById('nomorWa').value.trim();
+    simpanPengaturan(); terapkanSemuaPengaturan(); alert('Tersimpan! Tombol WA sudah diperbarui.');
+}
 
-// ==================== FUNGSI ADMIN ====================
-function bukaAdmin(e) { e.preventDefault(); document.getElementById('adminModal').style.display='block'; }
-function tutupAdmin() { document.getElementById('adminModal').style.display='none'; }
-window.onclick = e => { if(e.target === document.getElementById('adminModal')) tutupAdmin(); };
-
-function login() {
-    // Ambil dan bersihkan input (hilangkan spasi berlebih)
-    const inputUser = document.getElementById('username').value.trim();
-    const inputPass = document.getElementById('password').value.trim();
-    const error = document.getElementById('errorMsg');
-
-    // Cek kecocokan data
-    if(inputUser === USER_VALID && inputPass === PASS_VALID) {
-        localStorage.setItem('sudahLogin', 'ya');
-        tampilkanPanelAdmin();
+function bukaFormLayanan(idx=null) {
+    editIndexLayanan = idx;
+    document.getElementById('formLayanan').classList.remove('hidden');
+    if(idx!==null) {
+        document.getElementById('judulFormLayanan').textContent='Ubah Layanan';
+        document.getElementById('inpNamaLayanan').value=layanan[idx].nama;
+        document.getElementById('inpDeskripsiLayanan').value=layanan[idx].deskripsi;
+        document.getElementById('inpHargaLayanan').value=layanan[idx].harga;
     } else {
-        error.style.display = 'block';
-        setTimeout(() => error.style.display = 'none', 3000);
+        document.getElementById('judulFormLayanan').textContent='Tambah Layanan Baru';
+        document.getElementById('inpNamaLayanan').value='';
+        document.getElementById('inpDeskripsiLayanan').value='';
+        document.getElementById('inpHargaLayanan').value='';
     }
 }
-
-function logout() {
-    localStorage.removeItem('sudahLogin');
-    document.getElementById('loginPage').style.display = 'block';
-    document.getElementById('adminPage').style.display = 'none';
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
+function tutupFormLayanan() { document.getElementById('formLayanan').classList.add('hidden'); }
+function simpanLayanan() {
+    const n = document.getElementById('inpNamaLayanan').value.trim();
+    const d = document.getElementById('inpDeskripsiLayanan').value.trim();
+    const h = document.getElementById('inpHargaLayanan').value.trim();
+    if(!n||!h) return alert('Nama dan harga wajib diisi!');
+    if(editIndexLayanan!==null) layanan[editIndexLayanan]={nama:n, deskripsi:d, harga:h};
+    else layanan.push({nama:n, deskripsi:d, harga:h});
+    localStorage.setItem('dataLayanan', JSON.stringify(layanan));
+    tutupFormLayanan(); terapkanSemuaPengaturan(); alert('Layanan tersimpan!');
 }
-
-function tampilkanPanelAdmin() {
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('adminPage').style.display = 'block';
+function hapusLayanan(idx) {
+    if(confirm('Yakin hapus?')) { layanan.splice(idx,1); localStorage.setItem('dataLayanan', JSON.stringify(layanan)); terapkanSemuaPengaturan(); }
 }
-
-function tampilkanTabelAdmin() {
-    const tbody = document.getElementById('tabelHarga');
-    tbody.innerHTML = '';
-    daftarHarga.forEach((item, i) => {
-        tbody.innerHTML += `<tr>
-            <td>${i+1}</td>
-            <td>${item.nama}</td>
-            <td>${item.kategori}</td>
-            <td>Rp ${item.harga.toLocaleString('id-ID')}</td>
-            <td class="aksi">
-                <button class="btn btn-small btn-edit" onclick="editData(${item.id})">Ubah</button>
-                <button class="btn btn-small btn-hapus" onclick="hapusData(${item.id})">Hapus</button>
-            </td>
-        </tr>`;
-    });
-    simpanData();
+function tampilkanTabelLayanan() {
+    const tb = document.getElementById('tabelLayanan'); tb.innerHTML='';
+    layanan.forEach((l,i)=>{ tb.innerHTML += `<tr class="border-t"><td class="p-3">${i+1}</td><td class="p-3">${l.nama}</td><td class="p-3">${l.harga}</td><td class="p-3 text-center flex gap-1 justify-center"><button onclick="bukaFormLayanan(${i})" class="btn btn-warning text-xs px-2">Ubah</button><button onclick="hapusLayanan(${i})" class="btn btn-danger text-xs px-2">Hapus</button></td></tr>`; });
 }
-
-function tampilkanHargaWebsite() {
-    const wadah = document.getElementById('daftarHarga');
-    wadah.innerHTML = '';
-    daftarHarga.forEach(item => {
-        wadah.innerHTML += `<div class="service-card">
-            <h3>${item.nama}</h3>
-            <p style="color:var(--gray)">${item.kategori}</p>
-            <div class="harga-tag">Rp ${item.harga.toLocaleString('id-ID')}</div>
-        </div>`;
-    });
+function tampilkanLayananKeWeb() {
+    const wd = document.getElementById('daftarLayananWeb'); wd.innerHTML='';
+    layanan.forEach(l=>{ wd.innerHTML += `<div class="bg-white p-6 rounded-xl shadow-sm border"><h3 class="font-semibold mb-2">${l.nama}</h3><p class="text-gray-600 text-sm mb-3">${l.deskripsi}</p><p class="font-bold text-success">${l.harga}</p></div>`; });
 }
-
-function editData(id) {
-    const data = daftarHarga.find(x => x.id === id);
-    document.getElementById('editId').value = id;
-    document.getElementById('namaLayanan').value = data.nama;
-    document.getElementById('kategori').value = data.kategori;
-    document.getElementById('harga').value = data.harga;
-    document.getElementById('formTitle').textContent = "Ubah Layanan";
-}
-
-function hapusData(id) {
-    if(confirm('Yakin hapus?')) {
-        daftarHarga = daftarHarga.filter(x => x.id !== id);
-        tampilkanTabelAdmin();
-        tampilkanHargaWebsite();
-    }
-}
-
-document.getElementById('hargaForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const idEdit = document.getElementById('editId').value;
-    const nama = document.getElementById('namaLayanan').value;
-    const kat = document.getElementById('kategori').value;
-    const hrg = parseInt(document.getElementById('harga').value);
-
-    if(idEdit) {
-        const idx = daftarHarga.findIndex(x => x.id === parseInt(idEdit));
-        daftarHarga[idx] = {id:parseInt(idEdit), nama, kategori:kat, harga:hrg};
-    } else {
-        const idBaru = daftarHarga.length ? Math.max(...daftarHarga.map(x=>x.id))+1 : 1;
-        daftarHarga.push({id:idBaru, nama, kategori:kat, harga:hrg});
-    }
-
-    document.getElementById('hargaForm').reset();
-    document.getElementById('editId').value = '';
-    document.getElementById('formTitle').textContent = "Tambah Layanan Baru";
-    tampilkanTabelAdmin();
-    tampilkanHargaWebsite();
-    alert('✅ Berhasil disimpan!');
-});
-
-function simpanData() {
-    localStorage.setItem('daftarHarga', JSON.stringify(daftarHarga));
+function ubahAkun() {
+    const u = document.getElementById('userBaru').value.trim();
+    const p = document.getElementById('passBaru').value.trim();
+    const k = document.getElementById('ulangPass').value.trim();
+    if(!u||!p||!k||p!==k) return alert('Isi dengan benar!');
+    akun.username=u; akun.password=p; localStorage.setItem('akunAdmin', JSON.stringify(akun));
+    alert('Akun diperbarui!'); keluar();
 }
 </script>
 </body>
