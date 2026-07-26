@@ -320,11 +320,12 @@
             </div>
             <div class="grup">
                 <label>Jenis Layanan</label>
-                <select id="layanan" required>
+                <select id="jenisLayanan" required>
                     <option value="">Pilih layanan</option>
-                    <option>Perawatan Rutin</option>
-                    <option>Perbaikan Umum</option>
-                    <option>Cuci & Poles</option>
+                    <option value="Perawatan Rutin (Rp 25.000)">Perawatan Rutin (Rp 25.000)</option>
+                    <option value="Perbaikan Umum (Mulai Rp 15.000)">Perbaikan Umum (Mulai Rp 15.000)</option>
+                    <option value="Cuci & Poles (Rp 35.000)">Cuci & Poles (Rp 35.000)</option>
+                    <option value="Perbaikan Kerusakan Berat">Perbaikan Kerusakan Berat</option>
                 </select>
             </div>
             <div class="grup">
@@ -335,9 +336,9 @@
                 <label>Waktu Datang</label>
                 <select id="waktu" required>
                     <option value="">Pilih jam</option>
-                    <option>08.00 - 10.00 WIB</option>
-                    <option>10.00 - 12.00 WIB</option>
-                    <option>13.00 - 15.00 WIB</option>
+                    <option value="08.00 - 10.00 WIB">08.00 - 10.00 WIB</option>
+                    <option value="10.00 - 12.00 WIB">10.00 - 12.00 WIB</option>
+                    <option value="13.00 - 15.00 WIB">13.00 - 15.00 WIB</option>
                 </select>
             </div>
             <div class="grup">
@@ -376,14 +377,35 @@
     <footer>© 2026 Harmani Bike — Semua Hak Dilindungi</footer>
 
     <script>
-        // Nomor WA sudah diperbarui
         const NO_WA = '6285231312055';
 
         function toggleMenu() {document.getElementById('menu').classList.toggle('buka');}
 
+        // ✅ PERBAIKAN: Ambil nilai jenis layanan dengan benar
         document.getElementById('formServis').addEventListener('submit', e => {
             e.preventDefault();
-            const pesan = `📅 PESAN JADWAL SERVIS\n\nNama: ${document.getElementById('nama').value}\nSepeda: ${document.getElementById('sepeda').value}\nLayanan: ${document.getElementById('layanan').value}\nTanggal: ${document.getElementById('tanggal').value}\nWaktu: ${document.getElementById('waktu').value}\nKeterangan: ${document.getElementById('ket').value || '-'}`;
+            
+            const nama = document.getElementById('nama').value.trim();
+            const sepeda = document.getElementById('sepeda').value.trim();
+            const jenisLayanan = document.getElementById('jenisLayanan').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const waktu = document.getElementById('waktu').value;
+            const keterangan = document.getElementById('ket').value.trim() || 'Tidak ada';
+
+            // ✅ Pesan lengkap dengan jenis layanan yang terbaca
+            const pesan = `📅 PESAN JADWAL SERVIS HARMANI BIKE
+
+👤 Nama Pemilik: ${nama}
+🚲 Jenis Sepeda: ${sepeda}
+🔧 Jenis Layanan: ${jenisLayanan}
+📆 Tanggal Servis: ${tanggal}
+⏰ Waktu Datang: ${waktu}
+
+📝 Keterangan Tambahan:
+${keterangan}
+
+Mohon konfirmasi ketersediaan jadwal, terima kasih.`;
+
             window.open(`https://wa.me/${NO_WA}?text=${encodeURIComponent(pesan)}`,'_blank');
             e.target.reset();
         });
@@ -415,7 +437,7 @@
         function tutupKeranjang() {document.getElementById('modalKeranjang').classList.remove('buka');}
         function pesanWA() {
             if(!keranjang.length) return alert('Keranjang kosong!');
-            let pesan = "🛒 PESANAN BARANG\n\n";
+            let pesan = "🛒 PESANAN BARANG HARMANI BIKE\n\n";
             keranjang.forEach(i=>pesan += `${i.nama} — Rp ${i.harga.toLocaleString()}\n`);
             window.open(`https://wa.me/${NO_WA}?text=${encodeURIComponent(pesan)}`,'_blank');
         }
