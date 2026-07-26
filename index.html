@@ -12,7 +12,8 @@
                 extend: {
                     colors: {
                         primary: '#165DFF',
-                        dark: '#111827'
+                        dark: '#111827',
+                        light: '#F9FAFB'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -45,15 +46,15 @@
 </head>
 <body class="font-sans text-dark bg-white">
 
-<!-- Modal Konfirmasi -->
+<!-- Modal Konfirmasi Pesan -->
 <div id="modalKonfirmasi" class="modal">
     <div class="modal-content">
         <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-check text-2xl text-green-500"></i>
         </div>
         <h3 class="text-xl font-bold mb-2">Pesan Terkirim!</h3>
-        <p class="text-gray-600 mb-4">Terima kasih, pesan Anda sudah masuk dengan baik.</p>
-        <p class="text-sm text-gray-500 mb-6">Kami akan konfirmasi jadwal maksimal 1 jam kerja.</p>
+        <p class="text-gray-600 mb-4">Terima kasih telah memesan layanan kami.</p>
+        <p class="text-sm text-gray-500 mb-6">Kami akan konfirmasi jadwal maksimal <b>1 jam kerja</b>.</p>
         <button onclick="tutupModal()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Tutup</button>
     </div>
 </div>
@@ -64,8 +65,10 @@
         <a href="#" class="text-2xl font-extrabold tracking-tight">Harmani<span class="text-primary">Bike</span></a>
         <nav class="hidden md:flex gap-6 items-center text-sm font-medium">
             <a href="#beranda" class="hover:text-primary transition">Beranda</a>
+            <a href="#tentang" class="hover:text-primary transition">Tentang</a>
             <a href="#layanan" class="hover:text-primary transition">Layanan</a>
             <a href="#harga" class="hover:text-primary transition">Harga</a>
+            <a href="#galeri" class="hover:text-primary transition">Galeri</a>
             <a href="#cek-status" class="hover:text-primary transition">Cek Status</a>
             <a href="#faq" class="hover:text-primary transition">FAQ</a>
             <a href="#kontak" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition">Pesan Servis</a>
@@ -77,8 +80,10 @@
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
         <div class="container mx-auto px-4 py-4 flex flex-col gap-3 text-sm font-medium">
             <a href="#beranda" class="py-2 hover:text-primary">Beranda</a>
+            <a href="#tentang" class="py-2 hover:text-primary">Tentang</a>
             <a href="#layanan" class="py-2 hover:text-primary">Layanan</a>
             <a href="#harga" class="py-2 hover:text-primary">Harga</a>
+            <a href="#galeri" class="py-2 hover:text-primary">Galeri</a>
             <a href="#cek-status" class="py-2 hover:text-primary">Cek Status</a>
             <a href="#faq" class="py-2 hover:text-primary">FAQ</a>
             <a href="#kontak" class="bg-primary text-white text-center py-2 rounded-lg hover:bg-primary/90">Pesan Servis</a>
@@ -91,47 +96,102 @@
     <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="text-center md:text-left">
-                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-6">
-                    Bengkel Sepeda Terpercaya di Kediri
+                <h1 class="text-[clamp(2.2rem,5vw,4rem)] font-bold leading-tight mb-6">
+                    Berkendara Lebih Baik. Lebih Aman. Penuh Percaya Diri.
                 </h1>
-                <p class="text-lg text-gray-600 mb-8">
-                    Layanan perbaikan, penyetelan, dan perawatan semua jenis sepeda dengan harga terjangkau dan hasil terjamin.
+                <p class="text-lg text-gray-600 mb-10">
+                    Layanan perbaikan dan perawatan sepeda presisi di Kediri, menjaga setiap komponen sepeda Anda dalam kondisi terbaik.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#kontak" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Pesan Sekarang</a>
-                    <a href="#cek-status" class="border border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Cek Perbaikan</a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-12">
+                    <a href="#kontak" class="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition">Pesan Perbaikan</a>
+                    <a href="#layanan" class="border border-primary text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition">Lihat Layanan</a>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-start gap-8">
+                    <div><div class="text-3xl font-bold">4.9</div><div class="text-sm text-gray-500 mt-1">Ulasan Pelanggan</div></div>
+                    <div><div class="text-3xl font-bold">10+</div><div class="text-sm text-gray-500 mt-1">Tahun Pengalaman</div></div>
+                    <div><div class="text-3xl font-bold">5.000+</div><div class="text-sm text-gray-500 mt-1">Sepeda Terservis</div></div>
                 </div>
             </div>
             <div class="rounded-2xl overflow-hidden shadow-xl">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mekanik sepeda" class="img-responsive">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mekanik merawat sepeda" class="img-responsive">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Layanan -->
+<!-- Tentang Kami -->
+<section id="tentang" class="section-padding">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="rounded-2xl overflow-hidden shadow-xl order-2 md:order-1">
+                <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tim bengkel sepeda Harmani Bike" class="img-responsive">
+            </div>
+            <div class="order-1 md:order-2">
+                <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Perbaikan Presisi dari Orang yang Suka Bersepeda</h2>
+                <p class="text-gray-600 mb-6 text-lg">
+                    Di Harmani Bike, kami bukan sekadar mekanik—kami juga pecinta sepeda. Kami paham setiap baut, rantai, dan gigi seperti telapak tangan kami sendiri.
+                </p>
+                <p class="text-gray-600 mb-8">
+                    Misi kami: menjaga sepeda Anda berperforma maksimal agar Anda bisa menikmati setiap kayuhan dengan aman dan nyaman.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Layanan Kami -->
 <section id="layanan" class="section-padding bg-gray-50">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-4">Layanan Kami</h2>
-            <p class="text-gray-600">Melayani semua jenis sepeda: harian, gunung, lipat, balap, hingga sepeda listrik</p>
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Paket Penyetelan & Layanan Lengkap</h2>
+            <p class="text-gray-600">Kami menyediakan berbagai layanan perbaikan untuk semua jenis sepeda dengan standar kualitas tinggi.</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white p-6 rounded-xl card-hover">
+                <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Penyetelan Umum" class="w-full h-40 object-cover rounded-lg mb-4">
                 <h3 class="text-lg font-bold mb-2">Penyetelan Umum</h3>
-                <p class="text-gray-600 text-sm">Cek rem, gigi, rantai, dan keamanan sepeda</p>
+                <p class="text-gray-600 text-sm">Pemeriksaan keseluruhan, setel rem & gigi, lumasi rantai</p>
             </div>
             <div class="bg-white p-6 rounded-xl card-hover">
-                <h3 class="text-lg font-bold mb-2">Perbaikan Kerusakan</h3>
-                <p class="text-gray-600 text-sm">Velg bengkok, rantai putus, bantalan rusak</p>
+                <img src="https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Perbaikan Rem & Gigi" class="w-full h-40 object-cover rounded-lg mb-4">
+                <h3 class="text-lg font-bold mb-2">Perbaikan Rem & Gigi</h3>
+                <p class="text-gray-600 text-sm">Perbaiki perpindahan kasar, rem tidak pakem</p>
             </div>
             <div class="bg-white p-6 rounded-xl card-hover">
+                <img src="https://images.unsplash.com/photo-1505705649312-0999b99d441c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Perbaikan Ban" class="w-full h-40 object-cover rounded-lg mb-4">
+                <h3 class="text-lg font-bold mb-2">Perbaikan Ban & Velg</h3>
+                <p class="text-gray-600 text-sm">Tambal, ganti ban, perbaiki velg bengkok</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl card-hover">
+                <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sepeda Listrik" class="w-full h-40 object-cover rounded-lg mb-4">
                 <h3 class="text-lg font-bold mb-2">Servis Sepeda Listrik</h3>
                 <p class="text-gray-600 text-sm">Cek baterai, motor, dan sistem kelistrikan</p>
             </div>
-            <div class="bg-white p-6 rounded-xl card-hover">
-                <h3 class="text-lg font-bold mb-2">Jemput & Antar</h3>
-                <p class="text-gray-600 text-sm">Layanan tambahan area Kota Kediri</p>
+        </div>
+    </div>
+</section>
+
+<!-- Cara Kerja -->
+<section id="cara-kerja" class="section-padding">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">3 Langkah Mudah Sepeda Anda Siap Kembali</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-6">
+                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">01</div>
+                <h3 class="text-xl font-bold mb-2">Pesan Lewat Online</h3>
+                <p class="text-gray-600">Tentukan jadwal kunjungan dan layanan yang dibutuhkan.</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">02</div>
+                <h3 class="text-xl font-bold mb-2">Serahkan Sepeda</h3>
+                <p class="text-gray-600">Bawa langsung atau minta layanan jemput di area Kediri.</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">03</div>
+                <h3 class="text-xl font-bold mb-2">Siap Berkendara</h3>
+                <p class="text-gray-600">Kami hubungi saat selesai, bisa ambil atau kami antar.</p>
             </div>
         </div>
     </div>
@@ -140,8 +200,8 @@
 <!-- Harga -->
 <section id="harga" class="section-padding">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-4">Daftar Harga</h2>
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Daftar Harga Layanan</h2>
             <p class="text-gray-600">Harga transparan tanpa biaya tersembunyi</p>
         </div>
         <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -164,17 +224,39 @@
     </div>
 </section>
 
-<!-- Cek Status -->
-<section id="cek-status" class="section-padding bg-gray-50">
+<!-- Galeri Hasil Kerja -->
+<section id="galeri" class="section-padding bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Galeri Hasil Kerja</h2>
+            <p class="text-gray-600">Lihat hasil kerja kami dan suasana bengkel</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div class="gallery-item aspect-square">
+                <img src="https://images.unsplash.com/photo-1541427078865-e641c815c638?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Servis Sepeda Gunung">
+            </div>
+            <div class="gallery-item aspect-square">
+                <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Perbaikan Rangka">
+            </div>
+            <div class="gallery-item aspect-square">
+                <img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e92?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sepeda Lipat">
+            </div>
+            <div class="gallery-item aspect-square">
+                <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Suasana Bengkel">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cek Status Perbaikan -->
+<section id="cek-status" class="section-padding">
     <div class="container mx-auto px-4">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-4">Cek Status Perbaikan</h2>
-            <p class="text-gray-600 mb-6">Masukkan nomor WhatsApp yang Anda gunakan saat pesan</p>
-            
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-4">Cek Status Perbaikan</h2>
+            <p class="text-gray-600 mb-6">Masukkan nomor WhatsApp atau kode pesanan Anda</p>
             <div class="bg-white p-6 rounded-xl shadow-sm">
-                <input type="text" id="inputStatus" placeholder="Contoh: 0852xxxx2055" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary mb-4">
+                <input type="text" id="inputStatus" placeholder="Contoh: 0852xxxx2055" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 mb-4">
                 <button onclick="cekStatus()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Cek Sekarang</button>
-
                 <div id="hasilStatus" class="status-hasil">
                     <h4 class="font-bold mb-2" id="judulStatus"></h4>
                     <p id="keteranganStatus"></p>
@@ -185,39 +267,67 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="section-padding">
+<section id="faq" class="section-padding bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-8 text-center">Pertanyaan Umum</h2>
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-8 text-center">Pertanyaan Umum</h2>
             <div class="space-y-4">
                 <div class="bg-white p-5 rounded-xl border border-gray-200">
-                    <h4 class="font-bold mb-2">Jam Buka?</h4>
-                    <p class="text-gray-600">Senin - Minggu 07.00 - 16.00 WIB. <b>Libur setiap hari Sabtu</b>.</p>
+                    <h4 class="font-bold mb-2">Jam Operasional?</h4>
+                    <p class="text-gray-600">Senin - Minggu pukul 07.00 – 16.00 WIB. <b>Libur setiap hari Sabtu</b>.</p>
                 </div>
                 <div class="bg-white p-5 rounded-xl border border-gray-200">
-                    <h4 class="font-bold mb-2">Nomor WhatsApp?</h4>
-                    <p class="text-gray-600">0852-3131-2055</p>
+                    <h4 class="font-bold mb-2">Lokasi Bengkel?</h4>
+                    <p class="text-gray-600">Jl. Kenanga No. 12, Kec. Mojoroto, Kota Kediri</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Kontak & Formulir -->
+<!-- Testimoni -->
+<section class="section-padding">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Apa Kata Pelanggan</h2>
+        </div>
+        <div class="slider-container max-w-4xl mx-auto">
+            <div class="slider-track" id="testimonialSlider">
+                <div class="slider-item">
+                    <div class="bg-white p-6 rounded-xl card-hover">
+                        <p class="text-gray-600 italic mb-4">"Pelayanan sangat teliti, harga jelas, sepeda saya seperti baru lagi!"</p>
+                        <div class="font-bold">Budi Prasetyo</div>
+                        <div class="text-sm text-gray-500">Pengguna Sepeda Gunung, Kediri</div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="bg-white p-6 rounded-xl card-hover">
+                        <p class="text-gray-600 italic mb-4">"Mekanik ramah dan sabar menjelaskan kerusakan. Sangat direkomendasikan!"</p>
+                        <div class="font-bold">Siti Aminah</div>
+                        <div class="text-sm text-gray-500">Pengguna Sepeda Harian, Kediri</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kontak & Formulir Pesan -->
 <section id="kontak" class="section-padding bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
                 <div>
-                    <h2 class="text-[clamp(1.5rem,3vw,2.2rem)] font-bold mb-6">Hubungi Kami</h2>
+                    <h2 class="text-[clamp(1.6rem,3vw,2.2rem)] font-bold mb-6">Hubungi Kami</h2>
                     <div class="space-y-4 text-gray-700">
                         <div class="flex items-center gap-3"><i class="fab fa-whatsapp text-xl text-green-500"></i> 0852-3131-2055</div>
-                        <div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-xl text-red-500"></i> Kota Kediri</div>
+                        <div class="flex items-center gap-3"><i class="fas fa-envelope text-xl text-primary"></i> harmanibike@gmail.com</div>
+                        <div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-xl text-red-500"></i> Jl. Kenanga No.12, Mojoroto, Kediri</div>
                         <div class="flex items-center gap-3"><i class="fas fa-clock text-xl text-primary"></i> Senin-Minggu 07.00-16.00 WIB</div>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 class="text-lg font-bold mb-4">Pesan Servis</h3>
+                    <h3 class="text-xl font-bold mb-4">Pesan Jadwal Servis</h3>
                     <form id="formPesan" class="space-y-4">
                         <input type="text" id="nama" placeholder="Nama Lengkap" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
                         <input type="tel" id="nomor" placeholder="Nomor WhatsApp" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
@@ -229,10 +339,26 @@
                             <option>Penyetelan Profesional - Rp 135.000</option>
                             <option>Perbaikan Khusus</option>
                         </select>
-                        <input type="date" id="tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                        <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition">Kirim Pesan ke WhatsApp</button>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="date" id="tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                            <select id="waktu" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                <option value="">Pilih Waktu</option>
+                                <option>07.00 - 09.00 WIB</option>
+                                <option>09.00 - 11.00 WIB</option>
+                                <option>11.00 - 13.00 WIB</option>
+                                <option>13.00 - 15.00 WIB</option>
+                                <option>15.00 - 16.00 WIB</option>
+                            </select>
+                        </div>
+                        <textarea id="catatan" rows="2" placeholder="Catatan tambahan (kerusakan khusus, dll)" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"></textarea>
+                        <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Kirim Pesan
+                        </button>
                     </form>
                 </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-gray-200 h-72">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7890123456789!2d112.012345!3d-7.812345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwNDguNycgUyAxMTLCsDAxJzU0LjUiRQ!5e0!3m2!1sid!2sid!4v1234567890123!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -246,7 +372,7 @@
 <!-- Footer -->
 <footer class="bg-dark text-white py-8">
     <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-400">© 2026 Harmani Bike - Bengkel Sepeda Kediri</p>
+        <p class="text-gray-400">© 2026 Harmani Bike - Bengkel Sepeda Terpercaya Kediri</p>
     </div>
 </footer>
 
@@ -279,7 +405,7 @@
         document.getElementById('keteranganStatus').textContent = 'Sepeda Anda sedang kami kerjakan. Kami akan kabari jika sudah selesai.';
     }
 
-    // FUNGSI PERBAIKAN: Pesan Cepat dari Tombol Harga
+    // Pesan Cepat dari Tombol Harga
     function kirimPesanLayanan(namaLayanan, hargaLayanan) {
         const pesan = `Halo Harmani Bike! 👋\nSaya ingin memesan layanan:\n✅ ${namaLayanan}\n💰 ${hargaLayanan}\nTerima kasih.`;
         window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`);
@@ -294,8 +420,10 @@
         const jenisSepeda = document.getElementById('jenisSepeda').value;
         const layanan = document.getElementById('layanan').value;
         const tanggal = document.getElementById('tanggal').value;
+        const waktu = document.getElementById('waktu').value;
+        const catatan = document.getElementById('catatan').value || 'Tidak ada catatan tambahan';
 
-        const pesanForm = `Halo Harmani Bike! 👋\nSaya ingin pesan servis:\n\n📝 Nama: ${nama}\n📱 WA: ${nomor}\n🚲 Jenis Sepeda: ${jenisSepeda}\n🔧 Layanan: ${layanan}\n📅 Tanggal: ${tanggal}\n\nMohon konfirmasinya ya. Terima kasih!`;
+        const pesanForm = `Halo Harmani Bike! 👋\nSaya ingin pesan servis:\n\n📝 Nama: ${nama}\n📱 WA: ${nomor}\n🚲 Jenis Sepeda: ${jenisSepeda}\n🔧 Layanan: ${layanan}\n📅 Tanggal: ${tanggal}\n⏰ Waktu: ${waktu}\n📝 Catatan: ${catatan}\n\nMohon konfirmasinya ya. Terima kasih!`;
 
         document.getElementById('modalKonfirmasi').classList.add('show');
         setTimeout(() => {
