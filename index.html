@@ -297,14 +297,14 @@
                     <div class="bg-white p-6 rounded-xl card-hover">
                         <p class="text-gray-600 italic mb-4">"Pelayanan sangat teliti, harga jelas, sepeda saya seperti baru lagi!"</p>
                         <div class="font-bold">Budi Prasetyo</div>
-                        <div class="text-sm text-gray-500">Pengguna Sepeda Gunung, Kediri</div>
+                        <div class="text-sm text-gray-500 mt-1">Pengguna Sepeda Gunung, Kediri</div>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="bg-white p-6 rounded-xl card-hover">
                         <p class="text-gray-600 italic mb-4">"Mekanik ramah dan sabar menjelaskan kerusakan. Sangat direkomendasikan!"</p>
                         <div class="font-bold">Siti Aminah</div>
-                        <div class="text-sm text-gray-500">Pengguna Sepeda Harian, Kediri</div>
+                        <div class="text-sm text-gray-500 mt-1">Pengguna Sepeda Harian, Kediri</div>
                     </div>
                 </div>
             </div>
@@ -332,22 +332,24 @@
                         <input type="text" id="nama" placeholder="Nama Lengkap" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
                         <input type="tel" id="nomor" placeholder="Nomor WhatsApp" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
                         <input type="text" id="jenisSepeda" placeholder="Jenis Sepeda" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <!-- ID DAN VALUE SUDAH DIPERBAIKI -->
                         <select id="layanan" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
                             <option value="">Pilih Layanan</option>
-                            <option>Penyetelan Dasar - Rp 45.000</option>
-                            <option>Penyetelan Standar - Rp 85.000</option>
-                            <option>Penyetelan Profesional - Rp 135.000</option>
-                            <option>Perbaikan Khusus</option>
+                            <option value="Penyetelan Dasar - Rp 45.000">Penyetelan Dasar - Rp 45.000</option>
+                            <option value="Penyetelan Standar - Rp 85.000">Penyetelan Standar - Rp 85.000</option>
+                            <option value="Penyetelan Profesional - Rp 135.000">Penyetelan Profesional - Rp 135.000</option>
+                            <option value="Perbaikan Khusus">Perbaikan Khusus</option>
                         </select>
                         <div class="grid grid-cols-2 gap-4">
                             <input type="date" id="tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                            <!-- ID DAN VALUE SUDAH DIPERBAIKI -->
                             <select id="waktu" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
                                 <option value="">Pilih Waktu</option>
-                                <option>07.00 - 09.00 WIB</option>
-                                <option>09.00 - 11.00 WIB</option>
-                                <option>11.00 - 13.00 WIB</option>
-                                <option>13.00 - 15.00 WIB</option>
-                                <option>15.00 - 16.00 WIB</option>
+                                <option value="07.00 - 09.00 WIB">07.00 - 09.00 WIB</option>
+                                <option value="09.00 - 11.00 WIB">09.00 - 11.00 WIB</option>
+                                <option value="11.00 - 13.00 WIB">11.00 - 13.00 WIB</option>
+                                <option value="13.00 - 15.00 WIB">13.00 - 15.00 WIB</option>
+                                <option value="15.00 - 16.00 WIB">15.00 - 16.00 WIB</option>
                             </select>
                         </div>
                         <textarea id="catatan" rows="2" placeholder="Catatan tambahan (kerusakan khusus, dll)" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"></textarea>
@@ -379,64 +381,86 @@
 <script>
     const nomorWA = '6285231312055';
 
-    // Tutup Modal
     function tutupModal() {
-        document.getElementById('modalKonfirmasi').classList.remove('show');
+        const modal = document.getElementById('modalKonfirmasi');
+        if (modal) modal.classList.remove('show');
     }
 
-    // Blokir Hari Sabtu
+    // Blokir hari Sabtu
     const inputTanggal = document.getElementById('tanggal');
-    inputTanggal.addEventListener('input', function() {
-        const hari = new Date(this.value).getDay();
-        if (hari === 6) {
-            alert('Maaf, hari Sabtu kami libur. Silakan pilih tanggal lain.');
-            this.value = '';
-        }
-    });
-
-    // Cek Status Perbaikan
-    function cekStatus() {
-        const input = document.getElementById('inputStatus').value.trim();
-        const hasil = document.getElementById('hasilStatus');
-        if (!input) { alert('Masukkan nomor WhatsApp!'); return; }
-        
-        hasil.className = 'status-hasil status-proses show';
-        document.getElementById('judulStatus').textContent = '🔄 Sedang Diperbaiki';
-        document.getElementById('keteranganStatus').textContent = 'Sepeda Anda sedang kami kerjakan. Kami akan kabari jika sudah selesai.';
+    if (inputTanggal) {
+        inputTanggal.addEventListener('input', function() {
+            const hari = new Date(this.value).getDay();
+            if (hari === 6) {
+                alert('Maaf, hari Sabtu kami libur. Silakan pilih tanggal lain.');
+                this.value = '';
+            }
+        });
     }
 
-    // Pesan Cepat dari Tombol Harga
+    function cekStatus() {
+        const input = document.getElementById('inputStatus')?.value.trim() || '';
+        const hasil = document.getElementById('hasilStatus');
+        const judul = document.getElementById('judulStatus');
+        const keterangan = document.getElementById('keteranganStatus');
+        if (!input) { alert('Masukkan nomor WhatsApp!'); return; }
+        if (hasil) hasil.className = 'status-hasil status-proses show';
+        if (judul) judul.textContent = '🔄 Sedang Diperbaiki';
+        if (keterangan) keterangan.textContent = 'Sepeda Anda sedang kami kerjakan. Kami akan kabari jika sudah selesai.';
+    }
+
     function kirimPesanLayanan(namaLayanan, hargaLayanan) {
         const pesan = `Halo Harmani Bike! 👋\nSaya ingin memesan layanan:\n✅ ${namaLayanan}\n💰 ${hargaLayanan}\nTerima kasih.`;
-        window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`);
+        window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
     }
 
-    // Kirim Formulir Lengkap
-    document.getElementById('formPesan').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nama = document.getElementById('nama').value;
-        const nomor = document.getElementById('nomor').value;
-        const jenisSepeda = document.getElementById('jenisSepeda').value;
-        const layanan = document.getElementById('layanan').value;
-        const tanggal = document.getElementById('tanggal').value;
-        const waktu = document.getElementById('waktu').value;
-        const catatan = document.getElementById('catatan').value || 'Tidak ada catatan tambahan';
+    // FORMULIR SUDAH DIPERBAIKI TANPA MENGUBAH ID ASLI
+    const formPesan = document.getElementById('formPesan');
+    if (formPesan) {
+        formPesan.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ambil nilai dengan ID ASLI + pengecekan aman
+            const nama = document.getElementById('nama')?.value.trim() || '-';
+            const nomor = document.getElementById('nomor')?.value.trim() || '-';
+            const jenisSepeda = document.getElementById('jenisSepeda')?.value.trim() || '-';
+            const layanan = document.getElementById('layanan')?.value || '-';
+            const tanggal = document.getElementById('tanggal')?.value || '-';
+            const waktu = document.getElementById('waktu')?.value || '-';
+            const catatan = document.getElementById('catatan')?.value.trim() || 'Tidak ada catatan tambahan';
 
-        const pesanForm = `Halo Harmani Bike! 👋\nSaya ingin pesan servis:\n\n📝 Nama: ${nama}\n📱 WA: ${nomor}\n🚲 Jenis Sepeda: ${jenisSepeda}\n🔧 Layanan: ${layanan}\n📅 Tanggal: ${tanggal}\n⏰ Waktu: ${waktu}\n📝 Catatan: ${catatan}\n\nMohon konfirmasinya ya. Terima kasih!`;
+            const pesanForm = `Halo Harmani Bike! 👋
 
-        document.getElementById('modalKonfirmasi').classList.add('show');
-        setTimeout(() => {
-            window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanForm)}`);
-        }, 800);
-        
-        this.reset();
-    });
+Saya ingin pesan servis:
+
+📝 Nama: ${nama}
+📱 WA: ${nomor}
+🚲 Jenis Sepeda: ${jenisSepeda}
+🔧 Layanan: ${layanan}
+📅 Tanggal: ${tanggal}
+⏰ Waktu: ${waktu}
+📝 Catatan: ${catatan}
+
+Mohon konfirmasinya ya. Terima kasih!`;
+
+            const modal = document.getElementById('modalKonfirmasi');
+            if (modal) modal.classList.add('show');
+
+            setTimeout(() => {
+                window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanForm)}`, '_blank');
+                this.reset();
+            }, 800);
+        });
+    }
 
     // Menu Mobile
-    document.getElementById('menuBtn').addEventListener('click', () => {
-        document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 </script>
 </body>
 </html>
