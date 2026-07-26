@@ -35,9 +35,32 @@
         .gallery-item img { transition: transform 0.4s ease; width: 100%; height: 100%; object-fit: cover; }
         .gallery-item:hover img { transform: scale(1.1); }
         .img-responsive { width: 100%; height: auto; object-fit: cover; }
+        /* Gaya Modal Konfirmasi */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; border-radius: 1rem; padding: 2rem; max-width: 400px; width: 100%; text-align: center; }
+        /* Gaya Status Perbaikan */
+        .status-hasil { display: none; margin-top: 1rem; padding: 1rem; border-radius: 0.75rem; }
+        .status-diterima { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+        .status-proses { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+        .status-siap { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+        .status-selesai { background: #f3f4f6; border: 1px solid #e5e7eb; color: #4b5563; }
     </style>
 </head>
 <body class="font-sans text-dark bg-white">
+
+<!-- Modal Konfirmasi Pesan -->
+<div id="modalKonfirmasi" class="modal">
+    <div class="modal-content">
+        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-check text-2xl text-green-500"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Pesan Terkirim!</h3>
+        <p class="text-gray-600 mb-4">Terima kasih telah memesan layanan kami. Pesan Anda sudah masuk dengan baik.</p>
+        <p class="text-sm text-gray-500 mb-6">Kami akan segera membalas konfirmasi ketersediaan jadwal dalam waktu maksimal <b>1 jam kerja</b>.</p>
+        <button onclick="tutupModal()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Tutup</button>
+    </div>
+</div>
 
 <!-- Navigasi -->
 <header class="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
@@ -50,6 +73,7 @@
             <a href="#cara-kerja" class="hover:text-primary transition">Cara Kerja</a>
             <a href="#harga" class="hover:text-primary transition">Harga</a>
             <a href="#galeri" class="hover:text-primary transition">Hasil Kerja</a>
+            <a href="#cek-status" class="hover:text-primary transition">Cek Status</a>
             <a href="#faq" class="hover:text-primary transition">FAQ</a>
             <a href="#kontak" class="bg-primary text-white px-5 py-2 rounded-lg hover:bg-primary/90 transition">Pesan Servis</a>
         </nav>
@@ -65,6 +89,7 @@
             <a href="#cara-kerja" class="py-2 hover:text-primary">Cara Kerja</a>
             <a href="#harga" class="py-2 hover:text-primary">Harga</a>
             <a href="#galeri" class="py-2 hover:text-primary">Hasil Kerja</a>
+            <a href="#cek-status" class="py-2 hover:text-primary">Cek Status</a>
             <a href="#faq" class="py-2 hover:text-primary">FAQ</a>
             <a href="#kontak" class="bg-primary text-white text-center py-2 rounded-lg hover:bg-primary/90">Pesan Servis</a>
         </div>
@@ -299,6 +324,35 @@
     </div>
 </section>
 
+<!-- Cek Status Perbaikan -->
+<section id="cek-status" class="section-padding bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-4">Cek Status Perbaikan Sepeda</h2>
+            <p class="text-gray-600 mb-8">Masukkan nomor WhatsApp atau kode pesanan Anda untuk melihat perkembangan perbaikan sepeda.</p>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nomor WhatsApp / Kode Pesanan</label>
+                        <input type="text" id="inputStatus" placeholder="Contoh: 0812xxxx atau KODE123" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    </div>
+                    <button onclick="cekStatus()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">
+                        <i class="fas fa-search mr-2"></i> Cek Status Sekarang
+                    </button>
+                </div>
+
+                <!-- Hasil Status -->
+                <div id="hasilStatus" class="status-hasil">
+                    <h4 class="font-bold mb-2" id="judulStatus"></h4>
+                    <p id="keteranganStatus"></p>
+                    <p class="text-xs mt-3 opacity-80" id="waktuStatus"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq" class="section-padding">
     <div class="container mx-auto px-4">
@@ -370,7 +424,7 @@
                     <h2 class="text-[clamp(1.6rem,3vw,2.2rem)] font-bold mb-6">Hubungi Kami</h2>
                     <p class="text-gray-600 mb-8">Siap membantu menjaga sepeda Anda tetap prima. Hubungi kami kapan saja atau kunjungi bengkel kami di Kediri.</p>
                     <div class="space-y-4">
-                        <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary"><i class="fab fa-whatsapp"></i></div><div>0812-3456-7890 (WhatsApp Business)</div></div>
+                        <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary"><i class="fab fa-whatsapp"></i></div><div>0852-3131-2055 (WhatsApp Business)</div></div>
                         <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary"><i class="fas fa-envelope"></i></div><div>harmanibike@gmail.com</div></div>
                         <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary"><i class="fas fa-map-marker-alt"></i></div><div>Jl. Kenanga No. 12, Kec. Mojoroto, Kota Kediri</div></div>
                         <div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-primary"><i class="fas fa-clock"></i></div><div>Senin - Minggu: 07.00 - 16.00 WIB | Sabtu: Libur</div></div>
@@ -385,7 +439,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium mb-1">Nomor WhatsApp</label>
-                            <input type="tel" id="nomor" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Contoh: 0812xxxx7890">
+                            <input type="tel" id="nomor" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Contoh: 0852xxxx2055">
                         </div>
                         <div>
                             <label class="block text-sm font-medium mb-1">Jenis Sepeda</label>
@@ -436,7 +490,7 @@
 </section>
 
 <!-- Tombol WhatsApp Mengambang -->
-<a href="https://wa.me/6281234567890" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-green-600 transition z-50"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/6285231312055" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-green-600 transition z-50"><i class="fab fa-whatsapp"></i></a>
 
 <!-- Footer -->
 <footer class="bg-dark text-white py-12">
@@ -450,8 +504,13 @@
 </footer>
 
 <script>
-    // Ganti dengan nomor WhatsApp Business Anda (tanpa angka 0 di depan)
-    const nomorWA = '6281234567890';
+    // Ganti dengan nomor WhatsApp baru Anda (tanpa angka 0 di depan)
+    const nomorWA = '6285231312055';
+
+    // Fungsi tutup modal konfirmasi
+    function tutupModal() {
+        document.getElementById('modalKonfirmasi').classList.remove('show');
+    }
 
     // Blokir pemilihan hari Sabtu di kalender
     const inputTanggal = document.getElementById('tanggalKunjungan');
@@ -463,6 +522,44 @@
             this.value = '';
         }
     });
+
+    // Fungsi Cek Status Perbaikan
+    function cekStatus() {
+        const input = document.getElementById('inputStatus').value.trim();
+        const hasil = document.getElementById('hasilStatus');
+        const judul = document.getElementById('judulStatus');
+        const keterangan = document.getElementById('keteranganStatus');
+        const waktu = document.getElementById('waktuStatus');
+
+        if (!input) {
+            alert('Silakan masukkan nomor WhatsApp atau kode pesanan!');
+            return;
+        }
+
+        // Contoh data status (nanti bisa disesuaikan dengan data asli Anda)
+        let statusData;
+        if (input.includes('852') || input.toUpperCase().startsWith('KDR')) {
+            statusData = {
+                kelas: 'status-proses',
+                judul: '🔄 Sedang Diperbaiki',
+                keterangan: 'Sepeda Anda sedang dalam proses penyetelan gigi dan rem. Estimasi selesai 2 jam lagi.',
+                waktu: 'Terakhir diperbarui: Hari ini 08.45 WIB'
+            };
+        } else {
+            statusData = {
+                kelas: 'status-diterima',
+                judul: '✅ Pesanan Diterima',
+                keterangan: 'Kami sudah mencatat data sepeda Anda dan akan segera memulai perbaikan.',
+                waktu: 'Terakhir diperbarui: Hari ini 07.15 WIB'
+            };
+        }
+
+        // Tampilkan hasil
+        hasil.className = `status-hasil ${statusData.kelas} show`;
+        judul.textContent = statusData.judul;
+        keterangan.textContent = statusData.keterangan;
+        waktu.textContent = statusData.waktu;
+    }
 
     // Fungsi pesan cepat dari kartu harga
     function pesanLayanan(namaLayanan, harga) {
@@ -484,63 +581,4 @@ Mohon informasikan ketersediaan dan langkah selanjutnya. Terima kasih!`;
         
         const nama = document.getElementById('nama').value;
         const nomor = document.getElementById('nomor').value;
-        const jenisSepeda = document.getElementById('jenisSepeda').value;
-        const layanan = document.getElementById('layanan').value;
-        const tanggalKunjungan = document.getElementById('tanggalKunjungan').value;
-        const waktuKunjungan = document.getElementById('waktuKunjungan').value;
-        const catatan = document.getElementById('catatan').value || 'Tidak ada catatan tambahan';
-
-        // Format tanggal menjadi lebih mudah dibaca
-        const formatTanggal = new Date(tanggalKunjungan).toLocaleDateString('id-ID', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-
-        // Template pesan profesional dengan jadwal
-        const pesan = `Halo Tim Harmani Bike! 👋
-
-Saya ingin memesan layanan servis sepeda dengan rincian berikut:
-
-👤 Nama Pemesan: ${nama}
-📞 Nomor WhatsApp: ${nomor}
-🚲 Jenis Sepeda: ${jenisSepeda}
-🛠️ Layanan yang Dipilih: ${layanan}
-
-📅 Jadwal Kunjungan:
-Tanggal: ${formatTanggal}
-Waktu: ${waktuKunjungan}
-
-📝 Catatan Tambahan:
-${catatan}
-
-Mohon konfirmasi ketersediaan jadwal dan informasi selanjutnya. Terima kasih atas bantuan Anda! 🙏
-
----
-*Harmani Bike - Bengkel Sepeda Terpercaya Kediri*
-Senin - Minggu 07.00 - 16.00 WIB | Sabtu Libur`;
-
-        const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-        window.open(url, '_blank');
-        this.reset();
-    });
-
-    // Menu Mobile
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-
-    // Slider Testimoni
-    const slider = document.getElementById('testimonialSlider');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let index = 0;
-    const itemWidth = window.innerWidth >= 768 ? 50 : 100;
-    function updateSlider() { slider.style.transform = `translateX(-${index * itemWidth}%)`; }
-    nextBtn.addEventListener('click', () => { const maxIndex = window.innerWidth >= 768 ? 2 : 3; index = index >= maxIndex ? 0 : index + 1; updateSlider(); });
-    prevBtn.addEventListener('click', () => { const maxIndex = window.innerWidth >= 768 ? 2 : 3; index = index <= 0 ? maxIndex : index - 1; updateSlider(); });
-    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
-</script>
-</body>
-</html>
+        const jenisSepeda =
