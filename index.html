@@ -2,467 +2,425 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmani Bike - Bengkel Sepeda Terpercaya di Kediri</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#165DFF',
-                        dark: '#111827',
-                        light: '#F9FAFB'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Harmani Bike - Bengkel & Toko Sepeda</title>
     <style>
-        html { scroll-behavior: smooth; }
-        .section-padding { padding: 5rem 0; }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .slider-container { overflow: hidden; }
-        .slider-track { display: flex; transition: transform 0.5s ease; }
-        .slider-item { flex: 0 0 100%; padding: 0 1rem; }
-        @media (min-width: 768px) { .slider-item { flex: 0 0 50%; } }
-        .gallery-item { overflow: hidden; border-radius: 0.75rem; }
-        .gallery-item img { transition: transform 0.4s ease; width: 100%; height: 100%; object-fit: cover; }
-        .gallery-item:hover img { transform: scale(1.1); }
-        .img-responsive { width: 100%; height: auto; object-fit: cover; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
-        .modal.show { display: flex; }
-        .modal-content { background: white; border-radius: 1rem; padding: 2rem; max-width: 400px; width: 100%; text-align: center; }
-        .status-hasil { display: none; margin-top: 1rem; padding: 1rem; border-radius: 0.75rem; }
-        .status-diterima { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
-        .status-proses { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
-        .status-siap { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif;}
+        :root {
+            --biru-utama: #165DFF;
+            --biru-lembut: #E8F3FF;
+            --abu-utama: #374151;
+            --abu-lembut: #6B7280;
+            --putih: #FFFFFF;
+            --bg-terang: #F9FAFB;
+            --bayangan: 0 2px 8px rgba(0,0,0,0.06);
+            --hijau-wa: #10B981;
+            --hijau-lembut: #ECFDF5;
+        }
+        a {text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent;}
+        ul {list-style: none;}
+        button, input, select, textarea {font-size: 1rem;}
+
+        /* NAVBAR */
+        nav {
+            background: var(--putih);
+            box-shadow: var(--bayangan);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding: 0.8rem 4%;
+            border-bottom: 1px solid var(--bg-terang);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--biru-utama);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-links a {
+            font-weight: 500;
+            color: var(--abu-utama);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.aktif {
+            color: var(--biru-utama);
+            font-weight: 600;
+        }
+        .nav-aksi {display: flex; align-items: center; gap: 0.8rem;}
+        .keranjang {
+            position: relative;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--abu-lembut);
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+        .keranjang:hover {color: var(--biru-utama);}
+        .jumlah-keranjang {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #EF4444;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 50%;
+            min-width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-wa {
+            background: var(--hijau-lembut);
+            color: var(--hijau-wa);
+            border: 1px solid var(--hijau-wa);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-wa:hover {
+            background: var(--hijau-wa);
+            color: white;
+        }
+        .tombol-hp {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--abu-utama);
+            padding: 0.5rem;
+            margin: -0.5rem;
+        }
+
+        /* MENU HP */
+        @media (max-width: 768px) {
+            .tombol-hp {display: block;}
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1.2rem 5%;
+                gap: 1rem;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+                transform: translateY(-10px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.25s ease;
+            }
+            .nav-links.buka {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            .nav-links a {
+                display: block;
+                padding: 0.7rem;
+                width: 100%;
+                text-align: center;
+                border-radius: 6px;
+            }
+            .nav-links a.aktif, .nav-links a:hover {background: var(--biru-lembut);}
+            .btn-wa {padding: 0.5rem 0.8rem; font-size: 0.85rem;}
+            .logo {font-size: 1.1rem;}
+        }
+
+        /* KONTEN UMUM */
+        section {max-width: 100%; margin: 0 auto; padding: 2rem 4%;}
+        .judul {text-align: center; margin-bottom: 1.5rem;}
+        .judul h2 {font-size: 1.5rem; color: var(--abu-utama); margin-bottom: 0.5rem;}
+        .garis {width: 50px; height: 3px; background: var(--biru-utama); margin: 0 auto; border-radius: 2px;}
+
+        /* BERANDA */
+        #beranda {
+            background: linear-gradient(rgba(22,93,255,0.9), rgba(22,93,255,0.8)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800') center/cover;
+            color: white; text-align: center; padding: 3.5rem 4%; border-radius: 0 0 12px 12px;
+        }
+        #beranda h1 {font-size: 1.7rem; margin-bottom: 1rem; line-height: 1.3;}
+        #beranda p {font-size: 1rem; margin: 0 auto 1.8rem; opacity: 0.95; line-height: 1.6;}
+        .btn-utama {
+            display: block;
+            background: white;
+            color: var(--biru-utama);
+            padding: 0.9rem; border-radius: 8px;
+            font-weight: 600; margin: 0.7rem auto;
+            transition: transform 0.2s;
+            max-width: 320px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn-utama.wa {
+            background: var(--hijau-wa);
+            color: white;
+            border: none;
+        }
+        .btn-utama:active {transform: scale(0.98);}
+
+        /* LAYANAN */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .kartu {
+            background: white; padding: 1.5rem; border-radius: 10px;
+            box-shadow: var(--bayangan); text-align: center;
+            border: 1px solid var(--bg-terang);
+        }
+        .kartu h3 {color: var(--biru-utama); margin: 0.7rem 0 0.4rem; font-size: 1.2rem;}
+        @media (min-width: 576px) {.grid-3 {grid-template-columns: repeat(2, 1fr);}}
+        @media (min-width: 768px) {.grid-3 {grid-template-columns: repeat(3, 1fr);}}
+
+        /* FORM JADWAL SERVIS */
+        #servis {background: var(--bg-terang); border-radius: 12px; margin: 1.5rem 4%; padding: 2rem 4%;}
+        .form {
+            max-width: 100%; margin: 0 auto; background: white;
+            padding: 1.5rem; border-radius: 10px; box-shadow: var(--bayangan);
+            border: 1px solid #E5E7EB;
+        }
+        .grup {margin-bottom: 1rem;}
+        .grup label {display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--abu-utama); font-size: 0.95rem;}
+        .grup input, .grup select, .grup textarea {
+            width: 100%; padding: 0.85rem; border: 1px solid #D1D5DB;
+            border-radius: 8px; font-size: 1rem;
+            background: white;
+        }
+        .grup input:focus, .grup select:focus {outline: none; border-color: var(--biru-utama);}
+        .btn-kirim {
+            width: 100%; padding: 0.9rem; background: var(--hijau-wa); color: white;
+            border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+        .btn-kirim:hover {background: #059669;}
+        .btn-kirim:active {transform: scale(0.98);}
+
+        /* MARKETPLACE */
+        .filter {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 0.6rem; margin-bottom: 1.5rem;
+        }
+        .btn-filter {
+            padding: 0.55rem 1rem; border: 1px solid var(--biru-lembut);
+            background: var(--putih); color: var(--biru-utama); border-radius: 20px;
+            cursor: pointer; font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .btn-filter.aktif, .btn-filter:hover {
+            background: var(--biru-utama);
+            color: white;
+            border-color: var(--biru-utama);
+        }
+        .grid-produk {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .kartu-produk {
+            background: white; border-radius: 10px; box-shadow: var(--bayangan); overflow: hidden;
+            border: 1px solid var(--bg-terang);
+        }
+        .isi-produk {padding: 1.2rem;}
+        .harga {font-size: 1.15rem; font-weight: 700; color: var(--biru-utama); margin: 0.7rem 0;}
+        .btn-beli {
+            width: 100%; padding: 0.8rem; background: var(--biru-utama); color: white;
+            border: none; border-radius: 8px; cursor: pointer; font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-beli:hover {background: #0F4CD0;}
+        @media (min-width: 576px) {.grid-produk {grid-template-columns: repeat(2, 1fr);}}
+        @media (min-width: 992px) {.grid-produk {grid-template-columns: repeat(3, 1fr);}}
+
+        /* KERANJANG */
+        .keranjang-modal {
+            display: none; position: fixed; top: 0; right: 0;
+            width: 100%; max-width: 100%; height: 100%;
+            background: white; box-shadow: -3px 0 10px rgba(0,0,0,0.1);
+            z-index: 9999; padding: 2rem 1.5rem; overflow-y: auto;
+        }
+        .keranjang-modal.buka {display: block;}
+        .tutup {
+            position: absolute; top: 1rem; right: 1.2rem;
+            font-size: 2rem; cursor: pointer; color: var(--abu-lembut);
+            padding: 0.5rem; margin: -0.5rem;
+        }
+
+        /* KONTAK & FOOTER */
+        #kontak {background: var(--bg-terang); border-radius: 12px; margin: 1.5rem 4%; padding: 1.5rem; border: 1px solid #E5E7EB;}
+        .kontak-item {margin-bottom: 0.8rem; color: var(--abu-utama); font-size: 0.95rem; line-height: 1.5;}
+        footer {
+            background: var(--abu-utama); color: white; text-align: center;
+            padding: 1.5rem 4%; margin-top: 2rem; font-size: 0.9rem;
+        }
     </style>
 </head>
-<body class="font-sans text-dark bg-white">
-
-<!-- Modal Konfirmasi Pesan -->
-<div id="modalKonfirmasi" class="modal">
-    <div class="modal-content">
-        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-check text-2xl text-green-500"></i>
-        </div>
-        <h3 class="text-xl font-bold mb-2">Pesan Terkirim!</h3>
-        <p class="text-gray-600 mb-4">Terima kasih telah memesan layanan kami.</p>
-        <p class="text-sm text-gray-500 mb-6">Kami akan konfirmasi jadwal maksimal <b>1 jam kerja</b>.</p>
-        <button onclick="tutupModal()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Tutup</button>
-    </div>
-</div>
-
-<!-- Navigasi -->
-<header class="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl font-extrabold tracking-tight">Harmani<span class="text-primary">Bike</span></a>
-        <nav class="hidden md:flex gap-6 items-center text-sm font-medium">
-            <a href="#beranda" class="hover:text-primary transition">Beranda</a>
-            <a href="#tentang" class="hover:text-primary transition">Tentang</a>
-            <a href="#layanan" class="hover:text-primary transition">Layanan</a>
-            <a href="#harga" class="hover:text-primary transition">Harga</a>
-            <a href="#galeri" class="hover:text-primary transition">Galeri</a>
-            <a href="#cek-status" class="hover:text-primary transition">Cek Status</a>
-            <a href="#faq" class="hover:text-primary transition">FAQ</a>
-            <a href="#kontak" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition">Pesan Servis</a>
-        </nav>
-        <button class="md:hidden text-2xl" id="menuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-        <div class="container mx-auto px-4 py-4 flex flex-col gap-3 text-sm font-medium">
-            <a href="#beranda" class="py-2 hover:text-primary">Beranda</a>
-            <a href="#tentang" class="py-2 hover:text-primary">Tentang</a>
-            <a href="#layanan" class="py-2 hover:text-primary">Layanan</a>
-            <a href="#harga" class="py-2 hover:text-primary">Harga</a>
-            <a href="#galeri" class="py-2 hover:text-primary">Galeri</a>
-            <a href="#cek-status" class="py-2 hover:text-primary">Cek Status</a>
-            <a href="#faq" class="py-2 hover:text-primary">FAQ</a>
-            <a href="#kontak" class="bg-primary text-white text-center py-2 rounded-lg hover:bg-primary/90">Pesan Servis</a>
-        </div>
-    </div>
-</header>
-
-<!-- Beranda -->
-<section id="beranda" class="pt-40 pb-24 bg-gradient-to-br from-blue-50 to-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="text-center md:text-left">
-                <h1 class="text-[clamp(2.2rem,5vw,4rem)] font-bold leading-tight mb-6">
-                    Berkendara Lebih Baik. Lebih Aman. Penuh Percaya Diri.
-                </h1>
-                <p class="text-lg text-gray-600 mb-10">
-                    Layanan perbaikan dan perawatan sepeda presisi di Kediri, menjaga setiap komponen sepeda Anda dalam kondisi terbaik.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-12">
-                    <a href="#kontak" class="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition">Pesan Perbaikan</a>
-                    <a href="#layanan" class="border border-primary text-primary px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition">Lihat Layanan</a>
-                </div>
-                <div class="flex flex-wrap justify-center md:justify-start gap-8">
-                    <div><div class="text-3xl font-bold">4.9</div><div class="text-sm text-gray-500 mt-1">Ulasan Pelanggan</div></div>
-                    <div><div class="text-3xl font-bold">10+</div><div class="text-sm text-gray-500 mt-1">Tahun Pengalaman</div></div>
-                    <div><div class="text-3xl font-bold">5.000+</div><div class="text-sm text-gray-500 mt-1">Sepeda Terservis</div></div>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden shadow-xl">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mekanik merawat sepeda" class="img-responsive">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Tentang Kami -->
-<section id="tentang" class="section-padding">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="rounded-2xl overflow-hidden shadow-xl order-2 md:order-1">
-                <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tim bengkel sepeda Harmani Bike" class="img-responsive">
-            </div>
-            <div class="order-1 md:order-2">
-                <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Perbaikan Presisi dari Orang yang Suka Bersepeda</h2>
-                <p class="text-gray-600 mb-6 text-lg">
-                    Di Harmani Bike, kami bukan sekadar mekanik—kami juga pecinta sepeda. Kami paham setiap baut, rantai, dan gigi seperti telapak tangan kami sendiri.
-                </p>
-                <p class="text-gray-600 mb-8">
-                    Misi kami: menjaga sepeda Anda berperforma maksimal agar Anda bisa menikmati setiap kayuhan dengan aman dan nyaman.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Layanan Kami -->
-<section id="layanan" class="section-padding bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Paket Penyetelan & Layanan Lengkap</h2>
-            <p class="text-gray-600">Kami menyediakan berbagai layanan perbaikan untuk semua jenis sepeda dengan standar kualitas tinggi.</p>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-xl card-hover">
-                <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Penyetelan Umum" class="w-full h-40 object-cover rounded-lg mb-4">
-                <h3 class="text-lg font-bold mb-2">Penyetelan Umum</h3>
-                <p class="text-gray-600 text-sm">Pemeriksaan keseluruhan, setel rem & gigi, lumasi rantai</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl card-hover">
-                <img src="https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Perbaikan Rem & Gigi" class="w-full h-40 object-cover rounded-lg mb-4">
-                <h3 class="text-lg font-bold mb-2">Perbaikan Rem & Gigi</h3>
-                <p class="text-gray-600 text-sm">Perbaiki perpindahan kasar, rem tidak pakem</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl card-hover">
-                <img src="https://images.unsplash.com/photo-1505705649312-0999b99d441c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Perbaikan Ban" class="w-full h-40 object-cover rounded-lg mb-4">
-                <h3 class="text-lg font-bold mb-2">Perbaikan Ban & Velg</h3>
-                <p class="text-gray-600 text-sm">Tambal, ganti ban, perbaiki velg bengkok</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl card-hover">
-                <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sepeda Listrik" class="w-full h-40 object-cover rounded-lg mb-4">
-                <h3 class="text-lg font-bold mb-2">Servis Sepeda Listrik</h3>
-                <p class="text-gray-600 text-sm">Cek baterai, motor, dan sistem kelistrikan</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Cara Kerja -->
-<section id="cara-kerja" class="section-padding">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">3 Langkah Mudah Sepeda Anda Siap Kembali</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="text-center p-6">
-                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">01</div>
-                <h3 class="text-xl font-bold mb-2">Pesan Lewat Online</h3>
-                <p class="text-gray-600">Tentukan jadwal kunjungan dan layanan yang dibutuhkan.</p>
-            </div>
-            <div class="text-center p-6">
-                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">02</div>
-                <h3 class="text-xl font-bold mb-2">Serahkan Sepeda</h3>
-                <p class="text-gray-600">Bawa langsung atau minta layanan jemput di area Kediri.</p>
-            </div>
-            <div class="text-center p-6">
-                <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">03</div>
-                <h3 class="text-xl font-bold mb-2">Siap Berkendara</h3>
-                <p class="text-gray-600">Kami hubungi saat selesai, bisa ambil atau kami antar.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Harga -->
-<section id="harga" class="section-padding">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Daftar Harga Layanan</h2>
-            <p class="text-gray-600">Harga transparan tanpa biaya tersembunyi</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
-                <h3 class="text-xl font-bold mb-2">Penyetelan Dasar</h3>
-                <div class="text-2xl font-bold text-primary mb-4">Rp 45.000</div>
-                <button onclick="kirimPesanLayanan('Penyetelan Dasar', 'Rp 45.000')" class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">Pesan</button>
-            </div>
-            <div class="bg-white p-6 rounded-xl border-2 border-primary card-hover">
-                <h3 class="text-xl font-bold mb-2">Penyetelan Standar</h3>
-                <div class="text-2xl font-bold text-primary mb-4">Rp 85.000</div>
-                <button onclick="kirimPesanLayanan('Penyetelan Standar', 'Rp 85.000')" class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">Pesan</button>
-            </div>
-            <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover">
-                <h3 class="text-xl font-bold mb-2">Penyetelan Profesional</h3>
-                <div class="text-2xl font-bold text-primary mb-4">Rp 135.000</div>
-                <button onclick="kirimPesanLayanan('Penyetelan Profesional', 'Rp 135.000')" class="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition">Pesan</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Galeri Hasil Kerja -->
-<section id="galeri" class="section-padding bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Galeri Hasil Kerja</h2>
-            <p class="text-gray-600">Lihat hasil kerja kami dan suasana bengkel</p>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            <div class="gallery-item aspect-square">
-                <img src="https://images.unsplash.com/photo-1541427078865-e641c815c638?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Servis Sepeda Gunung">
-            </div>
-            <div class="gallery-item aspect-square">
-                <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Perbaikan Rangka">
-            </div>
-            <div class="gallery-item aspect-square">
-                <img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e92?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sepeda Lipat">
-            </div>
-            <div class="gallery-item aspect-square">
-                <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Suasana Bengkel">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Cek Status Perbaikan -->
-<section id="cek-status" class="section-padding">
-    <div class="container mx-auto px-4">
-        <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-4">Cek Status Perbaikan</h2>
-            <p class="text-gray-600 mb-6">Masukkan nomor WhatsApp atau kode pesanan Anda</p>
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <input type="text" id="inputStatus" placeholder="Contoh: 0852xxxx2055" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50 mb-4">
-                <button onclick="cekStatus()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Cek Sekarang</button>
-                <div id="hasilStatus" class="status-hasil">
-                    <h4 class="font-bold mb-2" id="judulStatus"></h4>
-                    <p id="keteranganStatus"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="section-padding bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-8 text-center">Pertanyaan Umum</h2>
-            <div class="space-y-4">
-                <div class="bg-white p-5 rounded-xl border border-gray-200">
-                    <h4 class="font-bold mb-2">Jam Operasional?</h4>
-                    <p class="text-gray-600">Senin - Minggu pukul 07.00 – 16.00 WIB. <b>Libur setiap hari Sabtu</b>.</p>
-                </div>
-                <div class="bg-white p-5 rounded-xl border border-gray-200">
-                    <h4 class="font-bold mb-2">Lokasi Bengkel?</h4>
-                    <p class="text-gray-600">Jl. Kenanga No. 12, Kec. Mojoroto, Kota Kediri</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimoni -->
-<section class="section-padding">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-[clamp(1.6rem,3vw,2.5rem)] font-bold mb-6">Apa Kata Pelanggan</h2>
-        </div>
-        <div class="slider-container max-w-4xl mx-auto">
-            <div class="slider-track" id="testimonialSlider">
-                <div class="slider-item">
-                    <div class="bg-white p-6 rounded-xl card-hover">
-                        <p class="text-gray-600 italic mb-4">"Pelayanan sangat teliti, harga jelas, sepeda saya seperti baru lagi!"</p>
-                        <div class="font-bold">Budi Prasetyo</div>
-                        <div class="text-sm text-gray-500 mt-1">Pengguna Sepeda Gunung, Kediri</div>
-                    </div>
-                </div>
-                <div class="slider-item">
-                    <div class="bg-white p-6 rounded-xl card-hover">
-                        <p class="text-gray-600 italic mb-4">"Mekanik ramah dan sabar menjelaskan kerusakan. Sangat direkomendasikan!"</p>
-                        <div class="font-bold">Siti Aminah</div>
-                        <div class="text-sm text-gray-500 mt-1">Pengguna Sepeda Harian, Kediri</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Kontak & Formulir Pesan -->
-<section id="kontak" class="section-padding bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="max-w-5xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <h2 class="text-[clamp(1.6rem,3vw,2.2rem)] font-bold mb-6">Hubungi Kami</h2>
-                    <div class="space-y-4 text-gray-700">
-                        <div class="flex items-center gap-3"><i class="fab fa-whatsapp text-xl text-green-500"></i> 0852-3131-2055</div>
-                        <div class="flex items-center gap-3"><i class="fas fa-envelope text-xl text-primary"></i> harmanibike@gmail.com</div>
-                        <div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-xl text-red-500"></i> Jl. Kenanga No.12, Mojoroto, Kediri</div>
-                        <div class="flex items-center gap-3"><i class="fas fa-clock text-xl text-primary"></i> Senin-Minggu 07.00-16.00 WIB</div>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 class="text-xl font-bold mb-4">Pesan Jadwal Servis</h3>
-                    <form id="formPesan" class="space-y-4">
-                        <input type="text" id="nama" placeholder="Nama Lengkap" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                        <input type="tel" id="nomor" placeholder="Nomor WhatsApp" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                        <input type="text" id="jenisSepeda" placeholder="Jenis Sepeda" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                        <!-- VALUE SUDAH SESUAI PILIHAN -->
-                        <select id="layanan" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                            <option value="">Pilih Layanan</option>
-                            <option value="Penyetelan Dasar - Rp 45.000">Penyetelan Dasar - Rp 45.000</option>
-                            <option value="Penyetelan Standar - Rp 85.000">Penyetelan Standar - Rp 85.000</option>
-                            <option value="Penyetelan Profesional - Rp 135.000">Penyetelan Profesional - Rp 135.000</option>
-                            <option value="Perbaikan Khusus">Perbaikan Khusus</option>
-                        </select>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="date" id="tanggal" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                            <!-- VALUE SUDAH SESUAI PILIHAN -->
-                            <select id="waktu" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50">
-                                <option value="">Pilih Waktu</option>
-                                <option value="07.00 - 09.00 WIB">07.00 - 09.00 WIB</option>
-                                <option value="09.00 - 11.00 WIB">09.00 - 11.00 WIB</option>
-                                <option value="11.00 - 13.00 WIB">11.00 - 13.00 WIB</option>
-                                <option value="13.00 - 15.00 WIB">13.00 - 15.00 WIB</option>
-                                <option value="15.00 - 16.00 WIB">15.00 - 16.00 WIB</option>
-                            </select>
-                        </div>
-                        <textarea id="catatan" rows="2" placeholder="Catatan tambahan (kerusakan khusus, dll)" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/50"></textarea>
-                        <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2">
-                            <i class="fab fa-whatsapp"></i> Kirim Pesan
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="rounded-xl overflow-hidden border border-gray-200 h-72">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.7890123456789!2d112.012345!3d-7.812345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwNDguNycgUyAxMTLCsDAxJzU0LjUiRQ!5e0!3m2!1sid!2sid!4v1234567890123!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Tombol WA Mengambang -->
-<a href="https://wa.me/6285231312055" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-green-600 transition z-50">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Footer -->
-<footer class="bg-dark text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-400">© 2026 Harmani Bike - Bengkel Sepeda Terpercaya Kediri</p>
-    </div>
-</footer>
-
-<script>
-    const nomorWA = '6285231312055';
-
-    function tutupModal() {
-        const modal = document.getElementById('modalKonfirmasi');
-        if (modal) modal.classList.remove('show');
-    }
-
-    // Blokir hari Sabtu
-    const inputTanggal = document.getElementById('tanggal');
-    if (inputTanggal) {
-        inputTanggal.addEventListener('input', function() {
-            const hari = new Date(this.value).getDay();
-            if (hari === 6) {
-                alert('Maaf, hari Sabtu kami libur. Silakan pilih tanggal lain.');
-                this.value = '';
-            }
-        });
-    }
-
-    function cekStatus() {
-        const input = document.getElementById('inputStatus')?.value.trim() || '';
-        const hasil = document.getElementById('hasilStatus');
-        const judul = document.getElementById('judulStatus');
-        const keterangan = document.getElementById('keteranganStatus');
-        if (!input) { alert('Masukkan nomor WhatsApp!'); return; }
-        if (hasil) hasil.className = 'status-hasil status-proses show';
-        if (judul) judul.textContent = '🔄 Sedang Diperbaiki';
-        if (keterangan) keterangan.textContent = 'Sepeda Anda sedang kami kerjakan. Kami akan kabari jika sudah selesai.';
-    }
-
-    function kirimPesanLayanan(namaLayanan, hargaLayanan) {
-        const pesan = `Halo Harmani Bike! 👋\nSaya ingin memesan layanan:\n✅ ${namaLayanan}\n💰 ${hargaLayanan}\nTerima kasih.`;
-        window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
-    }
-
-    // FORMULIR SUDAH DIPERBAIKI TOTAL
-    const formPesan = document.getElementById('formPesan');
-    if (formPesan) {
-        formPesan.addEventListener('submit', function(e) {
-            e.preventDefault();
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#beranda" class="logo">HARMANI BIKE</a>
             
-            // Ambil nilai langsung dari elemen yang dipilih
-            const nama = document.getElementById('nama')?.value.trim() || 'Belum diisi';
-            const nomor = document.getElementById('nomor')?.value.trim() || 'Belum diisi';
-            const jenisSepeda = document.getElementById('jenisSepeda')?.value.trim() || 'Belum diisi';
-            const layananEl = document.getElementById('layanan');
-            const layanan = layananEl?.options[layananEl.selectedIndex]?.text || 'Pilihan tidak terbaca';
-            const tanggal = document.getElementById('tanggal')?.value || 'Belum dipilih';
-            const waktuEl = document.getElementById('waktu');
-            const waktu = waktuEl?.options[waktuEl.selectedIndex]?.text || 'Pilihan tidak terbaca';
-            const catatan = document.getElementById('catatan')?.value.trim() || 'Tidak ada catatan tambahan';
+            <ul class="nav-links" id="menu">
+                <li><a href="#beranda" class="aktif">Beranda</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#servis">Pesan Servis</a></li>
+                <li><a href="#toko">Toko</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
 
-            const pesanForm = `Halo Harmani Bike! 👋
+            <div class="nav-aksi">
+                <div class="keranjang" onclick="bukaKeranjang()">🛒 <span class="jumlah-keranjang" id="jml">0</span></div>
+                <a href="https://wa.me/6285231312055" class="btn-wa" target="_blank">Hubungi</a>
+                <div class="tombol-hp" onclick="toggleMenu()">☰</div>
+            </div>
+        </div>
+    </nav>
 
-Saya ingin pesan servis:
+    <section id="beranda">
+        <h1>Bengkel & Toko Sepeda Terpercaya</h1>
+        <p>Layanan servis profesional, pesan jadwal kapan saja, dan beli suku cadang asli lewat WhatsApp Business.</p>
+        <a href="#servis" class="btn-utama">Pesan Jadwal Servis</a>
+        <a href="https://wa.me/6285231312055" class="btn-utama wa" target="_blank">Hubungi Langsung</a>
+    </section>
 
-📝 Nama: ${nama}
-📱 WA: ${nomor}
-🚲 Jenis Sepeda: ${jenisSepeda}
-🔧 Layanan: ${layanan}
-📅 Tanggal: ${tanggal}
-⏰ Waktu: ${waktu}
-📝 Catatan: ${catatan}
+    <section id="layanan">
+        <div class="judul"><h2>Jasa Servis</h2><div class="garis"></div></div>
+        <div class="grid-3">
+            <div class="kartu"><h3>Perawatan Rutin</h3><p>Rp 25.000</p></div>
+            <div class="kartu"><h3>Perbaikan Umum</h3><p>Mulai Rp 15.000</p></div>
+            <div class="kartu"><h3>Cuci & Poles</h3><p>Rp 35.000</p></div>
+        </div>
+    </section>
 
-Mohon konfirmasinya ya. Terima kasih!`;
+    <section id="servis">
+        <div class="judul"><h2>Form Pesan Jadwal Servis</h2><div class="garis"></div></div>
+        <form class="form" id="formServis">
+            <div class="grup">
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama" required placeholder="Nama Anda">
+            </div>
+            <div class="grup">
+                <label>Jenis Sepeda</label>
+                <input type="text" id="sepeda" required placeholder="Contoh: Sepeda Lipat United">
+            </div>
+            <div class="grup">
+                <label>Jenis Layanan</label>
+                <select id="layanan" required>
+                    <option value="">Pilih layanan</option>
+                    <option>Perawatan Rutin</option>
+                    <option>Perbaikan Umum</option>
+                    <option>Cuci & Poles</option>
+                </select>
+            </div>
+            <div class="grup">
+                <label>Tanggal Servis</label>
+                <input type="date" id="tanggal" required>
+            </div>
+            <div class="grup">
+                <label>Waktu Datang</label>
+                <select id="waktu" required>
+                    <option value="">Pilih jam</option>
+                    <option>08.00 - 10.00 WIB</option>
+                    <option>10.00 - 12.00 WIB</option>
+                    <option>13.00 - 15.00 WIB</option>
+                </select>
+            </div>
+            <div class="grup">
+                <label>Keterangan Tambahan</label>
+                <textarea id="ket" rows="3" placeholder="Keterangan tambahan"></textarea>
+            </div>
+            <button type="submit" class="btn-kirim">Kirim ke WhatsApp Business</button>
+        </form>
+    </section>
 
-            const modal = document.getElementById('modalKonfirmasi');
-            if (modal) modal.classList.add('show');
+    <section id="toko">
+        <div class="judul"><h2>Suku Cadang & Aksesoris</h2><div class="garis"></div></div>
+        <div class="filter">
+            <button class="btn-filter aktif" onclick="filter('semua')">Semua</button>
+            <button class="btn-filter" onclick="filter('suku')">Suku Cadang</button>
+            <button class="btn-filter" onclick="filter('aksesoris')">Aksesoris</button>
+        </div>
+        <div class="grid-produk" id="produk"></div>
+    </section>
 
-            setTimeout(() => {
-                window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanForm)}`, '_blank');
-                this.reset();
-            }, 800);
+    <div class="keranjang-modal" id="modalKeranjang">
+        <span class="tutup" onclick="tutupKeranjang()">&times;</span>
+        <h3>Keranjang Belanja</h3>
+        <div id="isiKeranjang"></div>
+        <div style="margin-top: 1.5rem; font-weight: 700;">Total: Rp <span id="total">0</span></div>
+        <button class="btn-kirim" style="margin-top: 1rem;" onclick="pesanWA()">Pesan Sekarang</button>
+    </div>
+
+    <section id="kontak">
+        <div class="judul"><h2>Hubungi Kami</h2><div class="garis"></div></div>
+        <div class="kontak-item">📍 Jl. Contoh No.123, Kec. Pesantren, Kota Kediri</div>
+        <div class="kontak-item">📞 WhatsApp Business: 0852-3131-2055</div>
+        <div class="kontak-item">⏰ Senin–Sabtu 08.00–17.00 WIB</div>
+    </section>
+
+    <footer>© 2026 Harmani Bike — Semua Hak Dilindungi</footer>
+
+    <script>
+        // Nomor WA sudah diperbarui
+        const NO_WA = '6285231312055';
+
+        function toggleMenu() {document.getElementById('menu').classList.toggle('buka');}
+
+        document.getElementById('formServis').addEventListener('submit', e => {
+            e.preventDefault();
+            const pesan = `📅 PESAN JADWAL SERVIS\n\nNama: ${document.getElementById('nama').value}\nSepeda: ${document.getElementById('sepeda').value}\nLayanan: ${document.getElementById('layanan').value}\nTanggal: ${document.getElementById('tanggal').value}\nWaktu: ${document.getElementById('waktu').value}\nKeterangan: ${document.getElementById('ket').value || '-'}`;
+            window.open(`https://wa.me/${NO_WA}?text=${encodeURIComponent(pesan)}`,'_blank');
+            e.target.reset();
         });
-    }
 
-    // Menu Mobile
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-</script>
+        const produk = [
+            {id:1, nama:"Ban Luar 26", harga:85000, kat:'suku'},
+            {id:2, nama:"Rantai Sepeda", harga:45000, kat:'suku'},
+            {id:3, nama:"Lampu LED", harga:35000, kat:'aksesoris'}
+        ];
+        let keranjang = [];
+
+        function tampilkan(data) {
+            const wadah = document.getElementById('produk'); wadah.innerHTML = '';
+            data.forEach(i=>wadah.innerHTML += `<div class="kartu-produk"><div style="height:140px;background:#F3F4F6;"></div><div class="isi-produk"><div style="font-weight:500;">${i.nama}</div><div class="harga">Rp ${i.harga.toLocaleString()}</div><button class="btn-beli" onclick="tambah(${i.id})">+ Keranjang</button></div></div>`);
+        }
+        function filter(kat) {
+            document.querySelectorAll('.btn-filter').forEach(b=>b.classList.remove('aktif')); event.target.classList.add('aktif');
+            tampilkan(kat==='semua' ? produk : produk.filter(p=>p.kat===kat));
+        }
+        function tambah(id) {keranjang.push(produk.find(i=>i.id===id)); updateKeranjang();}
+        function updateKeranjang() {
+            document.getElementById('jml').textContent = keranjang.length;
+            let isi = '', total = 0;
+            keranjang.forEach(i=>{isi += `<div style="padding:0.8rem 0;border-bottom:1px solid #eee;">${i.nama}<br>Rp ${i.harga.toLocaleString()}</div>`; total += i.harga;});
+            document.getElementById('isiKeranjang').innerHTML = isi;
+            document.getElementById('total').textContent = total.toLocaleString();
+        }
+        function bukaKeranjang() {document.getElementById('modalKeranjang').classList.add('buka');}
+        function tutupKeranjang() {document.getElementById('modalKeranjang').classList.remove('buka');}
+        function pesanWA() {
+            if(!keranjang.length) return alert('Keranjang kosong!');
+            let pesan = "🛒 PESANAN BARANG\n\n";
+            keranjang.forEach(i=>pesan += `${i.nama} — Rp ${i.harga.toLocaleString()}\n`);
+            window.open(`https://wa.me/${NO_WA}?text=${encodeURIComponent(pesan)}`,'_blank');
+        }
+
+        tampilkan(produk);
+    </script>
 </body>
 </html>
