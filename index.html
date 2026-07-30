@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmani Bike - Bengkel Sepeda Profesional Blitar</title>
-    <meta name="description" content="Solusi Perawatan Sepeda Terpercaya di Blitar. Cepat, Berpengalaman, dan Bergaransi.">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
+    <title x-text="seo.title">Bengkel Sepeda Blitar - Harmani Bike Professional Service</title>
+    <meta name="description" x-bind:content="seo.desc">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS & Alpine.js -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        primary: '#0f172a', /* Deep Blue */
-                        secondary: '#1e293b', /* Lighter Blue */
-                        accent: '#ccff00', /* Neon/Stabilo Yellow */
-                        accentHover: '#b3e600'
+                        brand: {
+                            blue: '#0f3460',      // Biru Profesional
+                            light: '#f8fafc',     // Putih Abu
+                            neon: '#eab308'       // Kuning Stabilo / Accent
+                        }
                     }
                 }
             }
@@ -28,605 +34,591 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ccff00; }
-        .hidden-section { display: none !important; }
+        ::-webkit-scrollbar-thumb { background: #0f3460; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #eab308; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-brand-light text-slate-800 font-sans antialiased" x-data="harmaniApp()">
 
-    <!-- ==================== FRONTEND (CUSTOMER VIEW) ==================== -->
-    <div id="frontend-view">
+    <!-- ==========================================
+         FRONTEND (CUSTOMER VIEW)
+    =========================================== -->
+    <div x-show="view === 'front'" x-transition.opacity>
         
-        <!-- Navbar -->
-        <nav class="bg-primary text-white sticky top-0 z-50 shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-20">
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-person-biking text-accent text-3xl"></i>
-                        <span class="font-bold text-2xl tracking-wider">HARMANI<span class="text-accent">BIKE</span></span>
-                    </div>
-                    <div class="hidden md:flex space-x-6 items-center">
-                        <a href="#home" class="hover:text-accent transition">Home</a>
-                        <a href="#profil" class="hover:text-accent transition">Profil</a>
-                        <a href="#layanan" class="hover:text-accent transition">Layanan</a>
-                        <a href="#toko" class="hover:text-accent transition">Toko</a>
-                        <a href="#testimoni" class="hover:text-accent transition">Testimoni</a>
-                        <div class="text-sm border-l border-gray-600 pl-4 py-1">
-                            <span class="block text-gray-300"><i class="fa-regular fa-clock text-accent"></i> Min - Jum: 07.00 - 16.00</span>
-                            <span class="block text-red-400"><i class="fa-solid fa-ban"></i> Sabtu: Libur</span>
-                        </div>
-                        <a href="#booking" class="bg-accent text-primary px-5 py-2 rounded-full font-bold hover:bg-accentHover transition">Booking</a>
-                    </div>
-                </div>
+        <!-- HEADER & NAVIGASI -->
+        <header class="fixed w-full bg-brand-blue text-white shadow-lg z-50">
+            <div class="container mx-auto px-4 py-2 flex justify-between items-center text-sm border-b border-blue-800/50">
+                <div><i class="fa-regular fa-clock text-brand-neon mr-1"></i> Minggu-Jumat 07.00-16.00 WIB (Sabtu Libur)</div>
+                <button @click="view = 'login'" class="text-xs hover:text-brand-neon transition"><i class="fa-solid fa-lock"></i> Admin</button>
             </div>
-        </nav>
+            <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold italic tracking-tight"><span class="text-brand-neon">Harmani</span>Bike.</a>
+                <div class="hidden md:flex space-x-6 font-semibold">
+                    <a href="#home" class="hover:text-brand-neon transition">Home</a>
+                    <a href="#profil" class="hover:text-brand-neon transition">Profil</a>
+                    <a href="#layanan" class="hover:text-brand-neon transition">Layanan</a>
+                    <a href="#toko" class="hover:text-brand-neon transition">Toko</a>
+                    <a href="#testimoni" class="hover:text-brand-neon transition">Testimoni</a>
+                    <a href="#booking" class="bg-brand-neon text-brand-blue px-4 py-1 rounded-full hover:bg-yellow-400 transition">Booking</a>
+                </div>
+            </nav>
+        </header>
 
-        <!-- 1. Hero Section -->
-        <section id="home" class="relative bg-secondary text-white pt-24 pb-32 px-4 text-center">
-            <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070')] bg-cover bg-center"></div>
-            <div class="relative max-w-4xl mx-auto z-10">
-                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">Servis Sepeda Profesional & <span class="text-accent">Tanpa Kompromi</span></h1>
-                <p class="text-xl mb-10 text-gray-300">Solusi Perawatan Sepeda Terpercaya di Blitar. Cepat, Berpengalaman, dan Bergaransi.</p>
-                <a href="#booking" class="bg-accent text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-accentHover transition shadow-lg shadow-accent/20">
-                    <i class="fa-solid fa-wrench mr-2"></i> Booking Servis Sekarang
-                </a>
+        <!-- HERO SECTION -->
+        <section id="home" class="pt-32 pb-20 bg-gradient-to-br from-brand-blue to-blue-900 text-white min-h-[85vh] flex items-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+            <div class="container mx-auto px-4 relative z-10 text-center md:text-left">
+                <div class="max-w-2xl">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">Solusi Perawatan Sepeda <span class="text-brand-neon">Terpercaya</span> di Blitar.</h1>
+                    <p class="text-lg text-blue-100 mb-8">Cepat, Berpengalaman, dan Bergaransi. Percayakan performa sepeda Anda pada teknisi ahli Harmani Bike.</p>
+                    <a href="#booking" class="inline-block bg-brand-neon text-brand-blue font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-brand-neon/50 hover:bg-yellow-400 transition transform hover:-translate-y-1">
+                        <i class="fa-solid fa-wrench mr-2"></i> Booking Servis Sekarang
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- 2. Profil & Alamat -->
+        <!-- PROFIL & ALAMAT -->
         <section id="profil" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold text-primary mb-6">Tentang <span class="text-accent bg-primary px-2 rounded">Harmani Bike</span></h2>
-                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">Kami adalah spesialis perbaikan dan perawatan segala jenis sepeda (MTB, Roadbike, Seli, dll). Berlokasi strategis di Blitar, kami menggunakan alat terstandar dengan mekanik handal.</p>
-                    <div class="bg-gray-100 p-6 rounded-lg border-l-4 border-primary shadow-sm mb-6">
-                        <h3 class="font-bold text-xl mb-3"><i class="fa-solid fa-location-dot text-red-500 mr-2"></i> Lokasi Bengkel</h3>
-                        <p class="text-gray-700">Jl. Pancasila, Ds. Sukosewu,<br>Kec. Gandusari, Kab. Blitar</p>
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4 border-l-4 border-brand-neon pl-4 text-brand-blue">Tentang Harmani Bike</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Kami adalah bengkel spesialis sepeda yang berdedikasi memberikan pelayanan prima untuk berbagai jenis sepeda mulai dari MTB, Roadbike, hingga sepeda lipat. Berlokasi strategis di Blitar, kami menggunakan peralatan standar industri dan mekanik profesional.</p>
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 text-brand-blue p-3 rounded-full mr-4"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Alamat Bengkel</h4>
+                                <p class="text-gray-600 text-sm">Jl. Pancasila, Ds. Sukosewu, Kec. Gandusari, Kab. Blitar</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="h-[350px] w-full rounded-xl overflow-hidden shadow-lg border-4 border-gray-100">
-                    <!-- Placeholder Maps Gandusari Blitar -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31610.702951717997!2d112.2758156157813!3d-8.066440232230214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78ebd36c1e1941%3d0x25a6f23b2c68e1ab!2sGandusari%2C%20Blitar!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <!-- Google Maps Placeholder -->
+                    <div class="h-80 bg-gray-200 rounded-xl overflow-hidden shadow-inner relative flex items-center justify-center border-2 border-dashed border-gray-300 group cursor-pointer hover:border-brand-neon transition">
+                        <div class="text-center">
+                            <i class="fa-solid fa-map-location-dot text-5xl text-gray-400 group-hover:text-brand-blue transition mb-2"></i>
+                            <p class="text-gray-500 font-medium">Peta Interaktif Google Maps (Placeholder)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Layanan & Tarif -->
-        <section id="layanan" class="py-20 bg-gray-100">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-primary">Layanan & Tarif Servis</h2>
-                    <p class="text-gray-600 mt-4 text-lg">Transparan, Terjangkau, Kualitas Juara.</p>
+        <!-- LAYANAN & TARIF -->
+        <section id="layanan" class="py-20 bg-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-brand-blue mb-2">Layanan & Tarif</h2>
+                    <p class="text-gray-500">Pilih layanan servis sesuai dengan kebutuhan sepeda Anda</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-2 transition duration-300">
-                        <div class="bg-primary p-6 text-center border-b-4 border-accent">
-                            <i class="fa-solid fa-oil-can text-5xl text-accent mb-4"></i>
-                            <h3 class="text-2xl font-bold text-white">Perawatan Rutin</h3>
-                            <p class="text-accent font-bold text-xl mt-2">Rp 25.000</p>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-6">Pengecekan umum, pelumasan rantai, penyetelan rem & gigi, serta pengecekan ban.</p>
-                            <button onclick="pilihLayanan('Perawatan Rutin')" class="w-full block text-center bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition">Pilih Layanan</button>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-2 transition duration-300">
-                        <div class="bg-primary p-6 text-center border-b-4 border-accent">
-                            <i class="fa-solid fa-screwdriver-wrench text-5xl text-accent mb-4"></i>
-                            <h3 class="text-2xl font-bold text-white">Perbaikan Umum</h3>
-                            <p class="text-accent font-bold text-xl mt-2">Mulai Rp 15.000</p>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-6">Perbaikan ban bocor, penggantian komponen (kanvas rem, kabel), penyetelan hub/BB.</p>
-                            <button onclick="pilihLayanan('Perbaikan Umum')" class="w-full block text-center bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition">Pilih Layanan</button>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-2 transition duration-300">
-                        <div class="bg-primary p-6 text-center border-b-4 border-accent">
-                            <i class="fa-solid fa-shower text-5xl text-accent mb-4"></i>
-                            <h3 class="text-2xl font-bold text-white">Cuci & Poles</h3>
-                            <p class="text-accent font-bold text-xl mt-2">Rp 35.000</p>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-6">Pembersihan menyeluruh detail frame, drivetrain, poles rangka, dan pelumasan anti karat.</p>
-                            <button onclick="pilihLayanan('Cuci & Poles')" class="w-full block text-center bg-gray-900 text-white py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition">Pilih Layanan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Toko Sparepart (Marketplace) -->
-        <section id="toko" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-                    <h2 class="text-4xl font-bold text-primary mb-4 md:mb-0">Katalog Toko</h2>
-                    <div class="flex gap-2">
-                        <button class="px-4 py-2 bg-primary text-white rounded font-semibold text-sm hover:bg-accent hover:text-primary">Semua</button>
-                        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-semibold text-sm hover:bg-primary hover:text-white">Suku Cadang</button>
-                        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-semibold text-sm hover:bg-primary hover:text-white">Aksesoris</button>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <!-- Produk 1 -->
-                    <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition bg-gray-50">
-                        <div class="bg-gray-300 h-40 rounded mb-4 flex items-center justify-center text-gray-500"><i class="fa-solid fa-image text-3xl"></i></div>
-                        <h4 class="font-bold text-lg mb-1">Rantai Shimano 9 Speed</h4>
-                        <p class="text-accent bg-primary inline-block px-2 py-1 rounded text-sm font-bold mb-4">Rp 125.000</p>
-                        <button onclick="beliProduk('Rantai Shimano 9 Speed')" class="w-full bg-green-500 text-white py-2 rounded font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> Beli via WA</button>
-                    </div>
-                    <!-- Produk 2 -->
-                    <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition bg-gray-50">
-                        <div class="bg-gray-300 h-40 rounded mb-4 flex items-center justify-center text-gray-500"><i class="fa-solid fa-image text-3xl"></i></div>
-                        <h4 class="font-bold text-lg mb-1">Ban Dalam Maxxis 27.5</h4>
-                        <p class="text-accent bg-primary inline-block px-2 py-1 rounded text-sm font-bold mb-4">Rp 65.000</p>
-                        <button onclick="beliProduk('Ban Dalam Maxxis 27.5')" class="w-full bg-green-500 text-white py-2 rounded font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> Beli via WA</button>
-                    </div>
-                    <!-- Produk 3 -->
-                    <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition bg-gray-50">
-                        <div class="bg-gray-300 h-40 rounded mb-4 flex items-center justify-center text-gray-500"><i class="fa-solid fa-image text-3xl"></i></div>
-                        <h4 class="font-bold text-lg mb-1">Helm Sepeda Cairbull</h4>
-                        <p class="text-accent bg-primary inline-block px-2 py-1 rounded text-sm font-bold mb-4">Rp 250.000</p>
-                        <button onclick="beliProduk('Helm Sepeda Cairbull')" class="w-full bg-green-500 text-white py-2 rounded font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> Beli via WA</button>
-                    </div>
-                    <!-- Produk 4 -->
-                    <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition bg-gray-50">
-                        <div class="bg-gray-300 h-40 rounded mb-4 flex items-center justify-center text-gray-500"><i class="fa-solid fa-image text-3xl"></i></div>
-                        <h4 class="font-bold text-lg mb-1">Oli Rantai Finish Line</h4>
-                        <p class="text-accent bg-primary inline-block px-2 py-1 rounded text-sm font-bold mb-4">Rp 90.000</p>
-                        <button onclick="beliProduk('Oli Rantai Finish Line')" class="w-full bg-green-500 text-white py-2 rounded font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> Beli via WA</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Booking & Tracking -->
-        <section id="booking" class="py-20 bg-primary relative text-white">
-            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16">
-                <!-- Form Booking -->
-                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-2xl">
-                    <h2 class="text-3xl font-bold text-primary mb-6 border-b-4 border-accent inline-block pb-2">Formulir Booking</h2>
-                    <form onsubmit="kirimBooking(event)" class="space-y-4">
-                        <div>
-                            <label class="block font-bold mb-1">Nama Pemilik</label>
-                            <input type="text" id="b-nama" required class="w-full border p-3 rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Masukkan Nama Anda">
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block font-bold mb-1">Pilihan Layanan</label>
-                                <select id="b-layanan" class="w-full border p-3 rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option value="Perawatan Rutin">Perawatan Rutin</option>
-                                    <option value="Perbaikan Umum">Perbaikan Umum</option>
-                                    <option value="Cuci & Poles">Cuci & Poles</option>
-                                </select>
+                    <template x-for="svc in services" :key="svc.id">
+                        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:border-brand-blue/20 transition group">
+                            <div class="h-14 w-14 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-neon group-hover:text-white transition">
+                                <i :class="svc.icon"></i>
                             </div>
-                            <div>
-                                <label class="block font-bold mb-1">Jenis Sepeda</label>
-                                <select id="b-jenis" class="w-full border p-3 rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option value="MTB">MTB</option>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800" x-text="svc.name"></h3>
+                            <div class="text-2xl font-black text-brand-blue mb-4" x-text="svc.price"></div>
+                            <p class="text-gray-500 text-sm mb-8" x-text="svc.desc"></p>
+                            <button @click="selectService(svc.name)" class="w-full py-3 rounded-lg border-2 border-brand-blue text-brand-blue font-semibold hover:bg-brand-blue hover:text-white transition">
+                                Pilih Layanan
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- MARKETPLACE -->
+        <section id="toko" class="py-20 bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold text-brand-blue mb-2">Katalog Produk</h2>
+                        <p class="text-gray-500">Sparepart & Aksesoris Original</p>
+                    </div>
+                    <div class="flex space-x-2 mt-4 md:mt-0">
+                        <button @click="filter = 'Semua'" :class="filter === 'Semua' ? 'bg-brand-blue text-white' : 'bg-gray-100 text-gray-600'" class="px-4 py-2 rounded-full text-sm font-semibold transition">Semua</button>
+                        <button @click="filter = 'Suku Cadang'" :class="filter === 'Suku Cadang' ? 'bg-brand-blue text-white' : 'bg-gray-100 text-gray-600'" class="px-4 py-2 rounded-full text-sm font-semibold transition">Suku Cadang</button>
+                        <button @click="filter = 'Aksesoris'" :class="filter === 'Aksesoris' ? 'bg-brand-blue text-white' : 'bg-gray-100 text-gray-600'" class="px-4 py-2 rounded-full text-sm font-semibold transition">Aksesoris</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <template x-for="prod in filteredProducts" :key="prod.id">
+                        <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400 text-xs">Foto Placeholder</div>
+                            <div class="p-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-gray-400" x-text="prod.category"></span>
+                                <h4 class="font-bold text-gray-800 mt-1 line-clamp-1" x-text="prod.name"></h4>
+                                <div class="text-brand-blue font-bold mt-2" x-text="'Rp ' + prod.price.toLocaleString('id-ID')"></div>
+                                <button @click="buyProduct(prod.name)" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded text-sm font-semibold transition flex items-center justify-center">
+                                    <i class="fa-brands fa-whatsapp mr-2"></i> Beli via WA
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKING & TRACKING -->
+        <section id="booking" class="py-20 bg-brand-blue text-white">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-16">
+                    <!-- Form Booking -->
+                    <div class="bg-white text-slate-800 p-8 rounded-2xl shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6 text-brand-blue border-b pb-4">Formulir Booking Servis</h3>
+                        <form @submit.prevent="submitBooking">
+                            <div class="mb-4">
+                                <label class="block text-sm font-bold mb-2">Nama Pemilik</label>
+                                <input type="text" x-model="book.name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-neon outline-none">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-bold mb-2">Jenis Sepeda</label>
+                                <select x-model="book.type" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-neon outline-none bg-white">
+                                    <option value="" disabled>Pilih Jenis Sepeda</option>
+                                    <option value="MTB">MTB (Mountain Bike)</option>
                                     <option value="Roadbike">Roadbike</option>
                                     <option value="Sepeda Lipat">Sepeda Lipat</option>
-                                    <option value="BMX/Lainnya">BMX / Lainnya</option>
+                                    <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>
-                        </div>
-                        <div>
-                            <label class="block font-bold mb-1">Keluhan / Pesan Tambahan</label>
-                            <textarea id="b-keluhan" rows="3" class="w-full border p-3 rounded bg-gray-50 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Misal: Rem depan blong dan rantai berbunyi kasar."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-accent text-primary font-bold text-lg py-4 rounded-lg hover:bg-accentHover transition shadow-lg mt-4">
-                            <i class="fa-solid fa-paper-plane mr-2"></i> Kirim Booking via WhatsApp
-                        </button>
-                    </form>
-                </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-bold mb-2">Pilihan Layanan</label>
+                                <select x-model="book.service" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-neon outline-none bg-white">
+                                    <option value="" disabled>Pilih Layanan</option>
+                                    <template x-for="svc in services">
+                                        <option :value="svc.name" x-text="svc.name"></option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-sm font-bold mb-2">Keluhan / Pesan</label>
+                                <textarea x-model="book.issue" rows="3" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-brand-neon outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand-neon text-brand-blue font-bold text-lg py-3 rounded-lg hover:bg-yellow-400 transition flex justify-center items-center">
+                                <i class="fa-regular fa-paper-plane mr-2"></i> Kirim Booking (via WA)
+                            </button>
+                        </form>
+                    </div>
 
-                <!-- Cek Status Servis -->
-                <div class="flex flex-col justify-center">
-                    <h2 class="text-4xl font-bold mb-4 text-white">Lacak Status Servis</h2>
-                    <p class="text-gray-300 mb-8 text-lg">Masukkan nomor nota Anda untuk melihat progres pengerjaan sepeda secara real-time.</p>
-                    
-                    <div class="bg-secondary p-8 rounded-2xl border border-gray-700 shadow-xl">
-                        <label class="block font-bold mb-2 text-accent">Nomor Nota / Resi</label>
-                        <div class="flex gap-2 mb-6">
-                            <input type="text" id="track-id" class="w-full p-4 rounded text-gray-900 font-bold tracking-widest uppercase focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Contoh: HB-0012">
-                            <button onclick="cekStatus()" class="bg-accent text-primary px-6 font-bold rounded hover:bg-accentHover">Cari</button>
-                        </div>
-                        <div id="track-result" class="hidden bg-gray-800 p-4 rounded-lg border border-gray-600">
-                            <p class="text-sm text-gray-400 mb-1">Status Kendaraan:</p>
-                            <h3 id="track-status" class="text-2xl font-bold text-accent"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Dikerjakan</h3>
+                    <!-- Tracking Info -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 text-brand-neon">Cek Status Servis</h2>
+                        <p class="text-blue-100 mb-8">Pantau perkembangan sepeda Anda secara real-time dengan memasukkan Nomor Nota Simulasi (Contoh: HB-001).</p>
+                        
+                        <div class="bg-blue-900/50 p-6 rounded-xl border border-blue-700 backdrop-blur-sm">
+                            <div class="flex space-x-2 mb-6">
+                                <input type="text" x-model="trackInput" placeholder="Masukkan Nomor Nota (Contoh: HB-001)" class="w-full px-4 py-3 rounded-lg text-slate-800 outline-none focus:ring-2 focus:ring-brand-neon">
+                                <button @click="checkTracking()" class="bg-brand-neon text-brand-blue px-6 font-bold rounded-lg hover:bg-yellow-400 transition">Cek</button>
+                            </div>
+                            
+                            <!-- Hasil Tracking -->
+                            <div x-show="trackResult" x-transition class="bg-white text-slate-800 p-4 rounded-lg flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs text-gray-500 font-bold uppercase" x-text="'Nota: ' + trackResult?.nota"></p>
+                                    <h4 class="font-bold text-lg" x-text="trackResult?.name"></h4>
+                                </div>
+                                <div class="px-4 py-1 rounded-full text-sm font-bold border"
+                                     :class="{
+                                         'bg-yellow-100 text-yellow-700 border-yellow-200': trackResult?.status === 'Sedang Antre',
+                                         'bg-blue-100 text-blue-700 border-blue-200': trackResult?.status === 'Dikerjakan',
+                                         'bg-green-100 text-green-700 border-green-200': trackResult?.status === 'Selesai'
+                                     }" x-text="trackResult?.status">
+                                </div>
+                            </div>
+                            <div x-show="trackError" x-transition class="text-red-400 text-sm bg-red-900/30 p-3 rounded mt-2">
+                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Nomor nota tidak ditemukan.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Testimoni & FAQ -->
-        <section id="testimoni" class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
-                <!-- Testimoni -->
-                <div>
-                    <h2 class="text-3xl font-bold text-primary mb-8">Apa Kata Mereka?</h2>
-                    <div class="space-y-6">
-                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent relative">
-                            <div class="flex text-yellow-400 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-gray-600 italic">"Servis MTB saya cepat banget, mekaniknya detail ngasih tau kerusakannya. Harga juga transparan, nggak getok!"</p>
-                            <div class="mt-4 font-bold text-primary">- Budi Santoso</div>
-                            <i class="fa-solid fa-quote-right absolute top-6 right-6 text-4xl text-gray-100"></i>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent relative">
-                            <div class="flex text-yellow-400 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-gray-600 italic">"Cuci sepeda di sini hasilnya kinclong parah seperti baru. Recomended banget buat warga Blitar!"</p>
-                            <div class="mt-4 font-bold text-primary">- Rina Agustin</div>
-                            <i class="fa-solid fa-quote-right absolute top-6 right-6 text-4xl text-gray-100"></i>
+        <!-- TESTIMONI & FAQ -->
+        <section id="testimoni" class="py-20 bg-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-16">
+                    <!-- FAQ -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-brand-blue mb-8">FAQ (Tanya Jawab)</h2>
+                        <div class="space-y-4">
+                            <template x-for="(faq, i) in faqs" :key="i">
+                                <div class="bg-white border rounded-lg overflow-hidden">
+                                    <button @click="activeFaq === i ? activeFaq = null : activeFaq = i" class="w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center hover:bg-gray-50">
+                                        <span x-text="faq.q"></span>
+                                        <i class="fa-solid" :class="activeFaq === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                    </button>
+                                    <div x-show="activeFaq === i" x-collapse class="px-6 pb-4 text-gray-600 border-t pt-2" x-text="faq.a"></div>
+                                </div>
+                            </template>
                         </div>
                     </div>
-                </div>
-                
-                <!-- FAQ -->
-                <div>
-                    <h2 class="text-3xl font-bold text-primary mb-8">Tanya Jawab (FAQ)</h2>
-                    <div class="space-y-4">
-                        <details class="group bg-white rounded-lg shadow-sm border p-4 cursor-pointer">
-                            <summary class="font-bold text-lg text-primary list-none flex justify-between items-center">
-                                Apakah ada layanan jemput sepeda?
-                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                            </summary>
-                            <p class="text-gray-600 mt-3 pt-3 border-t">Saat ini kami melayani antar-jemput sepeda khusus area Kecamatan Gandusari dengan tambahan biaya transportasi sebesar Rp 10.000.</p>
-                        </details>
-                        <details class="group bg-white rounded-lg shadow-sm border p-4 cursor-pointer">
-                            <summary class="font-bold text-lg text-primary list-none flex justify-between items-center">
-                                Berapa lama proses servis rutin?
-                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                            </summary>
-                            <p class="text-gray-600 mt-3 pt-3 border-t">Untuk servis perawatan rutin biasanya memakan waktu 45-60 menit tergantung dari antrean yang ada pada hari tersebut.</p>
-                        </details>
-                        <details class="group bg-white rounded-lg shadow-sm border p-4 cursor-pointer">
-                            <summary class="font-bold text-lg text-primary list-none flex justify-between items-center">
-                                Apakah perbaikan memiliki garansi?
-                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                            </summary>
-                            <p class="text-gray-600 mt-3 pt-3 border-t">Tentu! Kami memberikan garansi penyetelan ulang selama 3 hari setelah servis selesai jika dirasa masih ada yang kurang pas (syarat: bawa nota servis).</p>
-                        </details>
+
+                    <!-- Testimoni Grid -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-brand-blue mb-8">Apa Kata Mereka</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <template x-for="testi in testimonials">
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <div class="flex text-brand-neon text-sm mb-3">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p class="text-gray-600 text-sm italic mb-4" x-text="'&quot;' + testi.review + '&quot;'"></p>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-brand-blue text-xs mr-3" x-text="testi.name.charAt(0)"></div>
+                                        <span class="font-bold text-sm text-gray-800" x-text="testi.name"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Footer & Floating WA -->
-        <footer class="bg-primary text-gray-300 py-12 border-t-4 border-accent">
-            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
+        <!-- FOOTER -->
+        <footer class="bg-brand-blue text-white pt-16 pb-8 border-t border-blue-900">
+            <div class="container mx-auto px-4 grid md:grid-cols-3 gap-8 mb-10">
                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Harmani<span class="text-accent">Bike</span></h3>
-                    <p class="mb-4 text-sm">Spesialis perawatan dan perbaikan segala jenis sepeda. Kepuasan pelanggan dan detail pengerjaan adalah prioritas utama kami.</p>
+                    <h3 class="text-2xl font-bold italic tracking-tight mb-4"><span class="text-brand-neon">Harmani</span>Bike.</h3>
+                    <p class="text-blue-200 text-sm leading-relaxed mb-4">Bengkel spesialis perawatan dan perbaikan sepeda profesional di Blitar. Melayani dengan hati, bekerja dengan teliti.</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold mb-4">Info Kontak & Jadwal</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><i class="fa-solid fa-location-dot w-5 text-accent"></i> Jl. Pancasila, Sukosewu, Blitar</li>
-                        <li><i class="fa-brands fa-whatsapp w-5 text-accent"></i> 0852-3131-2055</li>
-                        <li><i class="fa-regular fa-clock w-5 text-accent"></i> Minggu-Jumat (07.00 - 16.00 WIB)</li>
-                        <li class="text-red-400"><i class="fa-solid fa-calendar-xmark w-5"></i> SABTU LIBUR</li>
+                    <h4 class="font-bold text-lg mb-4 text-brand-neon">Kontak & Lokasi</h4>
+                    <ul class="space-y-2 text-sm text-blue-200">
+                        <li><i class="fa-solid fa-location-dot w-5 text-center mr-2"></i> Jl. Pancasila, Ds. Sukosewu, Blitar</li>
+                        <li><i class="fa-solid fa-clock w-5 text-center mr-2"></i> Minggu - Jumat (07.00 - 16.00)</li>
+                        <li><i class="fa-solid fa-calendar-xmark w-5 text-center mr-2"></i> Sabtu LIBUR</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold mb-4">Media Sosial</h4>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/harmanibike" target="_blank" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-accent hover:text-primary transition"><i class="fa-brands fa-instagram text-xl"></i></a>
-                        <a href="https://facebook.com/harmanibike" target="_blank" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-accent hover:text-primary transition"><i class="fa-brands fa-facebook-f text-xl"></i></a>
-                        <a href="https://tiktok.com/@harmanibike" target="_blank" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-accent hover:text-primary transition"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                    <h4 class="font-bold text-lg mb-4 text-brand-neon">Ikuti Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com/harmanibike" target="_blank" class="w-10 h-10 bg-blue-800 rounded-full flex items-center justify-center hover:bg-brand-neon hover:text-brand-blue transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="https://facebook.com/harmanibike" target="_blank" class="w-10 h-10 bg-blue-800 rounded-full flex items-center justify-center hover:bg-brand-neon hover:text-brand-blue transition"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                        <a href="https://tiktok.com/@harmanibike" target="_blank" class="w-10 h-10 bg-blue-800 rounded-full flex items-center justify-center hover:bg-brand-neon hover:text-brand-blue transition"><i class="fa-brands fa-tiktok text-xl"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="max-w-7xl mx-auto px-4 text-center border-t border-gray-700 pt-6 text-sm flex justify-between items-center">
-                <p>&copy; 2026 Harmani Bike Blitar. All Rights Reserved.</p>
-                <button onclick="bukaLoginAdmin()" class="text-gray-600 hover:text-white" title="Admin Login"><i class="fa-solid fa-lock"></i></button>
+            <div class="container mx-auto px-4 text-center border-t border-blue-800 pt-8 text-blue-400 text-sm">
+                &copy; 2026 Harmani Bike. All rights reserved. 
             </div>
         </footer>
 
-        <!-- Floating WA Button -->
-        <a href="https://wa.me/6285231312055?text=Halo%20Harmani%20Bike,%20saya%20ingin%20bertanya%20tentang%20servis%20sepeda." target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 hover:scale-110 transition z-50 animate-bounce">
-            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <!-- FLOATING WA BUTTON -->
+        <a href="https://wa.me/6285231312055?text=Halo%20Harmani%20Bike,%20saya%20ingin%20bertanya%20tentang%20servis%20sepeda." target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 hover:scale-110 transition z-50">
+            <i class="fa-brands fa-whatsapp"></i>
         </a>
     </div>
 
-    <!-- ==================== ADMIN LOGIN MODAL ==================== -->
-    <div id="login-modal" class="hidden-section fixed inset-0 bg-primary/90 z-[100] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-primary">Admin <span class="text-accent bg-primary px-1">Login</span></h2>
-                <p class="text-gray-500 text-sm mt-1">Gunakan u: admin, p: admin123</p>
-            </div>
-            <input type="text" id="admin-user" placeholder="Username" class="w-full border p-3 rounded mb-4 focus:ring-2 focus:ring-accent outline-none">
-            <input type="password" id="admin-pass" placeholder="Password" class="w-full border p-3 rounded mb-6 focus:ring-2 focus:ring-accent outline-none">
-            <button onclick="prosesLogin()" class="w-full bg-primary text-white font-bold py-3 rounded hover:bg-secondary">Masuk Dashboard</button>
-            <button onclick="tutupLoginAdmin()" class="w-full text-center text-sm text-gray-500 mt-4 hover:text-red-500">Batal / Kembali</button>
+
+    <!-- ==========================================
+         BACKEND (LOGIN & ADMIN DASHBOARD)
+    =========================================== -->
+
+    <!-- LOGIN MODAL -->
+    <div x-show="view === 'login'" style="display:none;" class="fixed inset-0 bg-brand-blue flex items-center justify-center z-[100]">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm text-center">
+            <div class="text-3xl font-bold italic mb-2 text-brand-blue"><span class="text-brand-neon">Admin</span>Panel</div>
+            <p class="text-gray-500 mb-6 text-sm">Login untuk mengelola Harmani Bike</p>
+            <form @submit.prevent="doLogin">
+                <input type="text" x-model="login.user" placeholder="Username (admin)" required class="w-full px-4 py-3 border rounded-lg mb-4 bg-gray-50 outline-none focus:border-brand-blue focus:bg-white transition">
+                <input type="password" x-model="login.pass" placeholder="Password (admin)" required class="w-full px-4 py-3 border rounded-lg mb-6 bg-gray-50 outline-none focus:border-brand-blue focus:bg-white transition">
+                <button type="submit" class="w-full bg-brand-blue text-white py-3 rounded-lg font-bold hover:bg-blue-900 transition mb-4">Masuk Sistem</button>
+                <button type="button" @click="view = 'front'" class="text-sm text-gray-500 hover:text-brand-blue">Kembali ke Website</button>
+            </form>
+            <p x-show="loginError" class="text-red-500 text-xs mt-4">Username atau Password salah!</p>
         </div>
     </div>
 
-    <!-- ==================== BACKEND (ADMIN PANEL) ==================== -->
-    <div id="admin-view" class="hidden-section min-h-screen bg-gray-100 flex">
-        
-        <!-- Sidebar Admin -->
-        <aside class="w-64 bg-primary text-white flex flex-col">
-            <div class="p-6 border-b border-gray-700">
-                <h2 class="text-2xl font-bold text-accent">AdminPanel</h2>
-                <p class="text-xs text-gray-400">Harmani Bike Blitar</p>
+    <!-- ADMIN DASHBOARD -->
+    <div x-show="view === 'admin'" style="display:none;" class="min-h-screen bg-slate-100 flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-brand-blue text-white shadow-xl flex flex-col">
+            <div class="p-6 border-b border-blue-800 text-center">
+                <div class="text-xl font-bold italic mb-1"><span class="text-brand-neon">Harmani</span>CMS</div>
+                <div class="text-xs text-blue-300">Logged in as Administrator</div>
             </div>
-            <nav class="flex-1 p-4 space-y-2">
-                <a href="#" onclick="bukaTab('dashboard')" class="block p-3 bg-secondary rounded text-accent font-bold"><i class="fa-solid fa-chart-pie w-6"></i> Dashboard</a>
-                <a href="#" onclick="bukaTab('booking')" class="block p-3 hover:bg-secondary rounded text-gray-300 hover:text-white"><i class="fa-solid fa-list-check w-6"></i> Booking & Tracking</a>
-                <a href="#" onclick="bukaTab('produk')" class="block p-3 hover:bg-secondary rounded text-gray-300 hover:text-white"><i class="fa-solid fa-box-open w-6"></i> Produk Toko</a>
-                <a href="#" onclick="bukaTab('layanan')" class="block p-3 hover:bg-secondary rounded text-gray-300 hover:text-white"><i class="fa-solid fa-wrench w-6"></i> Tarif Servis</a>
-                <a href="#" onclick="bukaTab('seo')" class="block p-3 hover:bg-secondary rounded text-gray-300 hover:text-white"><i class="fa-solid fa-magnifying-glass w-6"></i> Pengaturan SEO</a>
+            <nav class="flex-1 py-4 text-sm font-medium">
+                <a href="#" @click.prevent="adminTab = 'dasbor'" :class="adminTab === 'dasbor' ? 'bg-blue-900 border-l-4 border-brand-neon' : 'hover:bg-blue-800'" class="block px-6 py-3 transition"><i class="fa-solid fa-chart-pie w-6"></i> Ringkasan</a>
+                <a href="#" @click.prevent="adminTab = 'booking'" :class="adminTab === 'booking' ? 'bg-blue-900 border-l-4 border-brand-neon' : 'hover:bg-blue-800'" class="block px-6 py-3 transition"><i class="fa-solid fa-clipboard-list w-6"></i> Booking & Nota</a>
+                <a href="#" @click.prevent="adminTab = 'produk'" :class="adminTab === 'produk' ? 'bg-blue-900 border-l-4 border-brand-neon' : 'hover:bg-blue-800'" class="block px-6 py-3 transition"><i class="fa-solid fa-box w-6"></i> Manajemen Produk</a>
+                <a href="#" @click.prevent="adminTab = 'layanan'" :class="adminTab === 'layanan' ? 'bg-blue-900 border-l-4 border-brand-neon' : 'hover:bg-blue-800'" class="block px-6 py-3 transition"><i class="fa-solid fa-tags w-6"></i> Manajemen Layanan</a>
+                <a href="#" @click.prevent="adminTab = 'seo'" :class="adminTab === 'seo' ? 'bg-blue-900 border-l-4 border-brand-neon' : 'hover:bg-blue-800'" class="block px-6 py-3 transition"><i class="fa-solid fa-magnifying-glass w-6"></i> Pengaturan SEO</a>
             </nav>
-            <div class="p-4 border-t border-gray-700">
-                <button onclick="logoutAdmin()" class="w-full bg-red-600 text-white p-2 rounded font-bold hover:bg-red-700"><i class="fa-solid fa-power-off"></i> Logout</button>
+            <div class="p-4 border-t border-blue-800">
+                <button @click="logout()" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded font-bold text-sm transition">
+                    <i class="fa-solid fa-power-off mr-1"></i> Logout
+                </button>
             </div>
-        </aside>
+        </div>
 
-        <!-- Main Content Admin -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            
-            <!-- Tab: Dashboard -->
-            <div id="tab-dashboard" class="admin-tab">
-                <h1 class="text-3xl font-bold text-gray-800 mb-8">Ringkasan Operasional</h1>
-                <div class="grid grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
-                        <p class="text-gray-500 text-sm font-bold uppercase">Total Booking Bulan Ini</p>
-                        <p class="text-4xl font-bold mt-2">124</p>
+        <!-- Main Content Area -->
+        <div class="flex-1 overflow-y-auto">
+            <div class="p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 uppercase" x-text="adminTab"></h2>
+
+                <!-- Tab: Ringkasan (Dasbor) -->
+                <div x-show="adminTab === 'dasbor'" class="grid grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                        <div class="text-sm text-gray-500 font-bold mb-1">Total Booking Masuk</div>
+                        <div class="text-3xl font-black text-gray-800" x-text="bookings.length"></div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-accent">
-                        <p class="text-gray-500 text-sm font-bold uppercase">Antrean Hari Ini</p>
-                        <p class="text-4xl font-bold mt-2">8 <span class="text-sm font-normal text-gray-400">sepeda</span></p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
+                        <div class="text-sm text-gray-500 font-bold mb-1">Antrean Hari Ini</div>
+                        <div class="text-3xl font-black text-gray-800" x-text="bookings.filter(b => b.status === 'Sedang Antre').length"></div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
-                        <p class="text-gray-500 text-sm font-bold uppercase">Produk Terjual</p>
-                        <p class="text-4xl font-bold mt-2">45 <span class="text-sm font-normal text-gray-400">items</span></p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                        <div class="text-sm text-gray-500 font-bold mb-1">Total Produk</div>
+                        <div class="text-3xl font-black text-gray-800" x-text="products.length"></div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tab: Booking & Tracking -->
-            <div id="tab-booking" class="admin-tab hidden-section">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">Manajemen Booking & Tracking</h1>
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <table class="w-full text-left">
-                        <thead class="bg-gray-800 text-white">
+                <!-- Tab: Manajemen Booking (Real-time tracking) -->
+                <div x-show="adminTab === 'booking'" class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-50 border-b">
                             <tr>
-                                <th class="p-4">ID Nota</th>
-                                <th class="p-4">Nama Pelanggan</th>
-                                <th class="p-4">Layanan</th>
-                                <th class="p-4">Keluhan</th>
-                                <th class="p-4">Status Update</th>
+                                <th class="p-4 font-bold text-gray-600">No. Nota</th>
+                                <th class="p-4 font-bold text-gray-600">Pelanggan</th>
+                                <th class="p-4 font-bold text-gray-600">Layanan</th>
+                                <th class="p-4 font-bold text-gray-600">Status Saat Ini</th>
+                                <th class="p-4 font-bold text-gray-600">Aksi (Ubah Status)</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y">
-                            <tr>
-                                <td class="p-4 font-bold">HB-0012</td>
-                                <td class="p-4">Budi Santoso<br><span class="text-xs text-gray-500">MTB</span></td>
-                                <td class="p-4">Perbaikan Umum</td>
-                                <td class="p-4 text-sm text-gray-600">Ganti kampas rem</td>
-                                <td class="p-4">
-                                    <select class="border p-2 rounded text-sm font-bold bg-yellow-100 text-yellow-800">
-                                        <option>Sedang Antre</option>
-                                        <option selected>Dikerjakan</option>
-                                        <option>Selesai</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-4 font-bold">HB-0013</td>
-                                <td class="p-4">Siti Aminah<br><span class="text-xs text-gray-500">Sepeda Lipat</span></td>
-                                <td class="p-4">Cuci & Poles</td>
-                                <td class="p-4 text-sm text-gray-600">-</td>
-                                <td class="p-4">
-                                    <select class="border p-2 rounded text-sm font-bold bg-red-100 text-red-800">
-                                        <option selected>Sedang Antre</option>
-                                        <option>Dikerjakan</option>
-                                        <option>Selesai</option>
-                                    </select>
-                                </td>
-                            </tr>
+                        <tbody>
+                            <template x-for="b in bookings" :key="b.nota">
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="p-4 font-mono text-brand-blue font-bold" x-text="b.nota"></td>
+                                    <td class="p-4" x-text="b.name"></td>
+                                    <td class="p-4" x-text="b.service"></td>
+                                    <td class="p-4">
+                                        <span class="px-2 py-1 rounded text-xs font-bold"
+                                            :class="b.status === 'Selesai' ? 'bg-green-100 text-green-700' : (b.status === 'Sedang Antre' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700')"
+                                            x-text="b.status"></span>
+                                    </td>
+                                    <td class="p-4">
+                                        <select x-model="b.status" class="text-xs border rounded p-1 bg-white outline-none focus:border-brand-blue">
+                                            <option value="Sedang Antre">Sedang Antre</option>
+                                            <option value="Dikerjakan">Dikerjakan</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
-            </div>
 
-            <!-- Tab: Produk -->
-            <div id="tab-produk" class="admin-tab hidden-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-3xl font-bold text-gray-800">Manajemen Toko</h1>
-                    <button class="bg-primary text-white px-4 py-2 rounded font-bold"><i class="fa-solid fa-plus"></i> Tambah Produk</button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <p class="text-gray-500 mb-4">*Simulasi CRUD Sederhana</p>
-                    <div class="flex gap-4 mb-4 border-b pb-4">
-                        <input type="text" value="Rantai Shimano 9 Speed" class="border p-2 rounded w-1/3">
-                        <input type="text" value="Rp 125.000" class="border p-2 rounded w-1/4">
-                        <button class="bg-blue-500 text-white px-4 rounded">Update</button>
-                        <button class="bg-red-500 text-white px-4 rounded">Hapus</button>
-                    </div>
-                    <div class="flex gap-4 mb-4 border-b pb-4">
-                        <input type="text" value="Helm Sepeda Cairbull" class="border p-2 rounded w-1/3">
-                        <input type="text" value="Rp 250.000" class="border p-2 rounded w-1/4">
-                        <button class="bg-blue-500 text-white px-4 rounded">Update</button>
-                        <button class="bg-red-500 text-white px-4 rounded">Hapus</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab: Layanan -->
-            <div id="tab-layanan" class="admin-tab hidden-section">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">Edit Tarif Servis</h1>
-                <div class="bg-white p-6 rounded-lg shadow space-y-4 max-w-2xl">
-                    <div class="flex justify-between items-center border-b pb-2">
-                        <span class="font-bold">Perawatan Rutin</span>
-                        <input type="text" value="Rp 25.000" class="border p-2 rounded text-right">
-                    </div>
-                    <div class="flex justify-between items-center border-b pb-2">
-                        <span class="font-bold">Perbaikan Umum</span>
-                        <input type="text" value="Mulai Rp 15.000" class="border p-2 rounded text-right">
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold">Cuci & Poles</span>
-                        <input type="text" value="Rp 35.000" class="border p-2 rounded text-right">
-                    </div>
-                    <button class="w-full bg-primary text-accent font-bold p-3 rounded mt-4">Simpan Perubahan Tarif</button>
-                </div>
-            </div>
-
-            <!-- Tab: SEO -->
-            <div id="tab-seo" class="admin-tab hidden-section">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6">Pengaturan SEO (Yoast Style)</h1>
-                <div class="bg-white p-8 rounded-lg shadow max-w-3xl">
-                    
-                    <!-- Indikator Score -->
-                    <div class="flex items-center gap-4 mb-8 bg-gray-100 p-4 rounded-lg">
-                        <span class="font-bold">SEO Score:</span>
-                        <div id="seo-indicator" class="w-6 h-6 rounded-full bg-yellow-400 shadow-inner"></div>
-                        <span id="seo-text" class="text-sm text-gray-600">Perlu Peningkatan</span>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block font-bold mb-2">SEO Title <span class="text-xs text-gray-500">(Maks 60 Karakter)</span></label>
-                            <input type="text" id="seo-title" oninput="cekSEO()" value="Harmani Bike - Bengkel Sepeda Profesional Blitar" class="w-full border p-3 rounded focus:ring-2 focus:ring-accent">
-                            <div class="text-xs mt-1 text-gray-500 text-right"><span id="title-count">48</span>/60</div>
+                <!-- Tab: Manajemen Produk -->
+                <div x-show="adminTab === 'produk'">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border">
+                        <div class="grid grid-cols-4 gap-4 font-bold text-gray-600 text-sm border-b pb-3 mb-3">
+                            <div>Kategori</div><div>Nama Produk</div><div>Harga (Rp)</div><div>Aksi</div>
                         </div>
-                        
-                        <div>
-                            <label class="block font-bold mb-2">Meta Description</label>
-                            <textarea id="seo-desc" oninput="cekSEO()" rows="3" class="w-full border p-3 rounded focus:ring-2 focus:ring-accent">Solusi Perawatan Sepeda Terpercaya di Blitar. Cepat, Berpengalaman, dan Bergaransi.</textarea>
-                        </div>
-                        
-                        <div>
-                            <label class="block font-bold mb-2">Target Focus Keywords</label>
-                            <input type="text" value="bengkel sepeda blitar, servis sepeda gandusari" class="w-full border p-3 rounded focus:ring-2 focus:ring-accent">
-                        </div>
-
-                        <div class="border-t pt-6 mt-6">
-                            <h3 class="font-bold text-lg mb-4">Open Graph (OG) Settings (Sosmed Preview)</h3>
-                            <div class="mb-4">
-                                <label class="block text-sm mb-1">OG Image URL (Thumbnail)</label>
-                                <input type="text" value="https://domainanda.com/assets/banner-wa.jpg" class="w-full border p-2 rounded bg-gray-50">
+                        <template x-for="p in products" :key="p.id">
+                            <div class="grid grid-cols-4 gap-4 items-center border-b pb-2 mb-2 text-sm">
+                                <div><input type="text" x-model="p.category" class="border p-1 w-full rounded"></div>
+                                <div><input type="text" x-model="p.name" class="border p-1 w-full rounded"></div>
+                                <div><input type="number" x-model="p.price" class="border p-1 w-full rounded"></div>
+                                <div><button @click="products = products.filter(x => x.id !== p.id)" class="text-red-500 hover:bg-red-50 p-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button></div>
                             </div>
-                        </div>
-
-                        <button class="bg-green-600 text-white font-bold px-8 py-3 rounded hover:bg-green-700">Simpan Konfigurasi SEO</button>
+                        </template>
+                        <button class="mt-4 text-sm bg-brand-blue text-white px-4 py-2 rounded hover:bg-blue-900 transition">+ Tambah Produk Dummy</button>
                     </div>
                 </div>
-            </div>
 
-        </main>
+                <!-- Tab: Manajemen Layanan -->
+                <div x-show="adminTab === 'layanan'" class="bg-white p-6 rounded-xl shadow-sm border">
+                    <p class="text-sm text-gray-500 mb-6">Ubah data layanan dan tarif di bawah ini. Perubahan akan langsung tampil di halaman depan.</p>
+                    <div class="space-y-6">
+                        <template x-for="svc in services" :key="svc.id">
+                            <div class="flex space-x-4 border-b pb-4">
+                                <div class="w-1/3">
+                                    <label class="text-xs font-bold text-gray-500">Nama Layanan</label>
+                                    <input type="text" x-model="svc.name" class="w-full border rounded p-2 text-sm">
+                                </div>
+                                <div class="w-1/3">
+                                    <label class="text-xs font-bold text-gray-500">Tarif / Harga Tampil</label>
+                                    <input type="text" x-model="svc.price" class="w-full border rounded p-2 text-sm">
+                                </div>
+                                <div class="w-1/3">
+                                    <label class="text-xs font-bold text-gray-500">Deskripsi Singkat</label>
+                                    <textarea x-model="svc.desc" rows="2" class="w-full border rounded p-2 text-sm"></textarea>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Tab: Pengaturan SEO -->
+                <div x-show="adminTab === 'seo'" class="bg-white p-6 rounded-xl shadow-sm border max-w-2xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-gray-800">Yoast-Style SEO Settings</h3>
+                        <!-- SEO Indicator -->
+                        <div class="flex items-center space-x-2 bg-gray-50 px-3 py-1 rounded border">
+                            <span class="text-xs font-bold text-gray-600">SEO Score:</span>
+                            <div class="w-3 h-3 rounded-full shadow-inner" 
+                                 :class="seoScore === 'Good' ? 'bg-green-500' : (seoScore === 'OK' ? 'bg-yellow-400' : 'bg-red-500')"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <label class="font-bold block mb-1">SEO Title <span class="text-xs font-normal text-gray-400">(Rekomendasi: 50-60 karakter)</span></label>
+                            <input type="text" x-model="seo.title" class="w-full border p-2 rounded focus:ring-2 focus:ring-brand-blue outline-none">
+                            <div class="w-full bg-gray-200 h-1 mt-1 rounded"><div class="h-1 bg-green-500 rounded" :style="`width: ${Math.min(seo.title.length * 1.6, 100)}%`"></div></div>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Meta Description <span class="text-xs font-normal text-gray-400">(Rekomendasi: 120-156 karakter)</span></label>
+                            <textarea x-model="seo.desc" rows="3" class="w-full border p-2 rounded focus:ring-2 focus:ring-brand-blue outline-none"></textarea>
+                            <div class="w-full bg-gray-200 h-1 mt-1 rounded"><div class="h-1 bg-green-500 rounded" :style="`width: ${Math.min(seo.desc.length * 0.6, 100)}%`"></div></div>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Target Focus Keywords</label>
+                            <input type="text" x-model="seo.keywords" placeholder="Misal: bengkel sepeda blitar, servis sepeda gandusari" class="w-full border p-2 rounded focus:ring-2 focus:ring-brand-blue outline-none">
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded border border-blue-100">
+                            <label class="font-bold block mb-2 text-brand-blue"><i class="fa-solid fa-share-nodes"></i> Open Graph (OG) Settings</label>
+                            <input type="text" x-model="seo.ogImage" placeholder="URL Thumbnail Image (Pratinjau Medsos)" class="w-full border p-2 rounded mb-2 outline-none">
+                            <p class="text-xs text-gray-500">Gambar ini akan muncul saat URL website dikirim ke WhatsApp atau Facebook.</p>
+                        </div>
+                        <button class="bg-green-600 text-white font-bold px-6 py-2 rounded hover:bg-green-700 transition">Simpan Pengaturan SEO</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- DATA & LOGIKA APLIKASI (ALPINE.JS) -->
     <script>
-        // --- FITUR FRONTEND ---
+        function harmaniApp() {
+            return {
+                view: 'front', // 'front', 'login', 'admin'
+                
+                // Login State
+                login: { user: '', pass: '' },
+                loginError: false,
+                adminTab: 'dasbor',
 
-        // Fungsi Pilih Layanan -> scroll dan auto-select form
-        function pilihLayanan(namaLayanan) {
-            document.getElementById('b-layanan').value = namaLayanan;
-            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-        }
+                // Database Layanan (Bisa diedit via admin)
+                services: [
+                    { id: 1, icon: 'fa-solid fa-oil-can', name: 'Perawatan Rutin', price: 'Rp 25.000', desc: 'Pengecekan umum, pelumasan rantai, penyetelan rem & gigi, pengecekan ban.' },
+                    { id: 2, icon: 'fa-solid fa-screwdriver-wrench', name: 'Perbaikan Umum', price: 'Mulai Rp 15.000', desc: 'Perbaikan ban bocor, penggantian komponen, penyetelan bagian tertentu.' },
+                    { id: 3, icon: 'fa-solid fa-jug-detergent', name: 'Cuci & Poles', price: 'Rp 35.000', desc: 'Pembersihan menyeluruh, poles rangka, pelumasan semua bagian bergerak.' }
+                ],
 
-        // Fungsi Beli Produk via WA
-        function beliProduk(namaProduk) {
-            const noWA = "6285231312055";
-            const teks = encodeURIComponent(`Halo Harmani Bike, saya tertarik membeli produk [${namaProduk}]. Apakah stoknya tersedia?`);
-            window.open(`https://wa.me/${noWA}?text=${teks}`, '_blank');
-        }
+                // Database Produk (Marketplace)
+                filter: 'Semua',
+                products: [
+                    { id: 1, category: 'Ban', name: 'Ban Luar Maxxis Pace 27.5', price: 215000 },
+                    { id: 2, category: 'Suku Cadang', name: 'Rantai Shimano 9 Speed', price: 185000 },
+                    { id: 3, category: 'Aksesoris', name: 'Helm Sepeda Polygon', price: 250000 },
+                    { id: 4, category: 'Suku Cadang', name: 'Kampas Rem Disc Brake', price: 35000 },
+                    { id: 5, category: 'Aksesoris', name: 'Lampu LED Sepeda USB', price: 45000 },
+                    { id: 6, category: 'Suku Cadang', name: 'Oli Rantai Finish Line', price: 120000 }
+                ],
+                get filteredProducts() {
+                    if (this.filter === 'Semua') return this.products;
+                    return this.products.filter(p => p.category === this.filter);
+                },
 
-        // Fungsi Kirim Booking Form
-        function kirimBooking(event) {
-            event.preventDefault();
-            const nama = document.getElementById('b-nama').value;
-            const layanan = document.getElementById('b-layanan').value;
-            const jenis = document.getElementById('b-jenis').value;
-            const keluhan = document.getElementById('b-keluhan').value;
-            
-            const noWA = "6285231312055";
-            const pesan = `Halo Harmani Bike, saya ingin booking servis *${layanan}* untuk sepeda *${jenis}* dengan keluhan: ${keluhan}. Nama saya *${nama}*.`;
-            
-            window.open(`https://wa.me/${noWA}?text=${encodeURIComponent(pesan)}`, '_blank');
-        }
+                // Data Booking (Terkoneksi ke tracker & tabel admin)
+                book: { name: '', type: '', service: '', issue: '' },
+                bookings: [
+                    { nota: 'HB-001', name: 'Budi Santoso', service: 'Perawatan Rutin', status: 'Selesai' },
+                    { nota: 'HB-002', name: 'Andi', service: 'Perbaikan Umum', status: 'Dikerjakan' },
+                    { nota: 'HB-003', name: 'Citra', service: 'Cuci & Poles', status: 'Sedang Antre' }
+                ],
 
-        // Fungsi Simulasi Tracking Status
-        function cekStatus() {
-            const resi = document.getElementById('track-id').value.toUpperCase();
-            const resultBox = document.getElementById('track-result');
-            const statusText = document.getElementById('track-status');
-            
-            if(!resi) return alert("Masukkan ID Nota!");
-            
-            resultBox.classList.remove('hidden');
-            if(resi === "HB-0012") {
-                statusText.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2 text-yellow-500"></i> Dikerjakan';
-            } else if (resi === "HB-0013") {
-                statusText.innerHTML = '<i class="fa-solid fa-clock mr-2 text-red-500"></i> Sedang Antre';
-            } else {
-                statusText.innerHTML = '<i class="fa-solid fa-check-circle mr-2 text-green-500"></i> Selesai';
-            }
-        }
+                // Tracker State
+                trackInput: '',
+                trackResult: null,
+                trackError: false,
 
-        // --- FITUR BACKEND / ADMIN ---
+                // FAQ & Testimoni
+                activeFaq: null,
+                faqs: [
+                    { q: 'Apakah melayani jemput antar sepeda ke rumah?', a: 'Ya, kami melayani pickup dan delivery untuk wilayah radius 5 km dari bengkel dengan biaya tambahan Rp 10.000.' },
+                    { q: 'Apakah servis memiliki garansi?', a: 'Tentu. Kami memberikan garansi servis selama 3 hari untuk keluhan yang sama pada komponen yang telah kami kerjakan.' },
+                    { q: 'Berapa lama waktu pengerjaan perawatan rutin?', a: 'Dalam kondisi antrean normal, perawatan rutin memakan waktu sekitar 30 - 45 menit.' }
+                ],
+                testimonials: [
+                    { name: 'Rangga', review: 'Pelayanannya cepat banget, mekaniknya komunikatif, harga sparepart juga transparan.' },
+                    { name: 'Siti Aminah', review: 'Pertama kali cuci sepeda disini hasilnya super kinclong. Terimakasih Harmani Bike!' }
+                ],
 
-        function bukaLoginAdmin() {
-            document.getElementById('login-modal').classList.remove('hidden-section');
-        }
-        function tutupLoginAdmin() {
-            document.getElementById('login-modal').classList.add('hidden-section');
-        }
+                // SEO Data
+                seo: {
+                    title: 'Bengkel Sepeda Blitar - Harmani Bike Professional Service',
+                    desc: 'Solusi perawatan dan perbaikan sepeda terpercaya di Blitar. Melayani servis rutin, perbaikan umum, cuci sepeda, dan sedia sparepart original.',
+                    keywords: 'bengkel sepeda blitar, servis sepeda gandusari, toko sepeda blitar',
+                    ogImage: ''
+                },
+                get seoScore() {
+                    const tLen = this.seo.title.length;
+                    const dLen = this.seo.desc.length;
+                    if (tLen >= 40 && tLen <= 65 && dLen >= 120) return 'Good';
+                    if (tLen > 0 && dLen > 0) return 'OK';
+                    return 'Bad';
+                },
 
-        function prosesLogin() {
-            const u = document.getElementById('admin-user').value;
-            const p = document.getElementById('admin-pass').value;
-            if(u === 'admin' && p === 'admin123') {
-                document.getElementById('login-modal').classList.add('hidden-section');
-                document.getElementById('frontend-view').classList.add('hidden-section');
-                document.getElementById('admin-view').classList.remove('hidden-section');
-            } else {
-                alert("Username / Password Salah!");
-            }
-        }
+                // Functions
+                selectService(name) {
+                    this.book.service = name;
+                    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+                },
+                buyProduct(name) {
+                    const text = `Halo Harmani Bike, saya tertarik membeli produk ${name}.`;
+                    window.open(`https://wa.me/6285231312055?text=${encodeURIComponent(text)}`, '_blank');
+                },
+                submitBooking() {
+                    const text = `Halo Harmani Bike, saya ingin booking servis ${this.book.service} untuk sepeda ${this.book.type} dengan keluhan: ${this.book.issue}. Nama saya ${this.book.name}.`;
+                    
+                    // Simulasikan masuk db lokal
+                    const newNota = 'HB-00' + (this.bookings.length + 1);
+                    this.bookings.push({
+                        nota: newNota,
+                        name: this.book.name,
+                        service: this.book.service,
+                        status: 'Sedang Antre'
+                    });
 
-        function logoutAdmin() {
-            document.getElementById('admin-view').classList.add('hidden-section');
-            document.getElementById('frontend-view').classList.remove('hidden-section');
-            document.getElementById('admin-user').value = '';
-            document.getElementById('admin-pass').value = '';
-        }
-
-        function bukaTab(tabName) {
-            // Sembunyikan semua tab
-            document.querySelectorAll('.admin-tab').forEach(el => el.classList.add('hidden-section'));
-            // Tampilkan tab yang dipilih
-            document.getElementById('tab-' + tabName).classList.remove('hidden-section');
-        }
-
-        // --- FITUR SEO ---
-        function cekSEO() {
-            const title = document.getElementById('seo-title').value.length;
-            const desc = document.getElementById('seo-desc').value.length;
-            
-            document.getElementById('title-count').innerText = title;
-            
-            const indicator = document.getElementById('seo-indicator');
-            const teks = document.getElementById('seo-text');
-            
-            if (title > 30 && title <= 60 && desc > 50) {
-                indicator.className = 'w-6 h-6 rounded-full shadow-inner bg-green-500';
-                teks.innerText = 'SEO Sangat Baik (Hijau)';
-            } else if (title > 60 || title < 15) {
-                indicator.className = 'w-6 h-6 rounded-full shadow-inner bg-red-500';
-                teks.innerText = 'Title Terlalu Panjang / Pendek (Merah)';
-            } else {
-                indicator.className = 'w-6 h-6 rounded-full shadow-inner bg-yellow-400';
-                teks.innerText = 'Perlu Peningkatan (Kuning)';
+                    // Reset & Buka WA
+                    this.book = { name: '', type: '', service: '', issue: '' };
+                    window.open(`https://wa.me/6285231312055?text=${encodeURIComponent(text)}`, '_blank');
+                    alert(`Simulasi: Booking tersimpan di DB. Nomor Nota Anda: ${newNota}`);
+                },
+                checkTracking() {
+                    this.trackError = false;
+                    this.trackResult = null;
+                    if (!this.trackInput) return;
+                    
+                    const res = this.bookings.find(b => b.nota.toUpperCase() === this.trackInput.toUpperCase());
+                    if (res) {
+                        this.trackResult = res;
+                    } else {
+                        this.trackError = true;
+                    }
+                },
+                doLogin() {
+                    if (this.login.user === 'admin' && this.login.pass === 'admin') {
+                        this.loginError = false;
+                        this.view = 'admin';
+                        this.login.pass = ''; // clear
+                    } else {
+                        this.loginError = true;
+                    }
+                },
+                logout() {
+                    this.view = 'login';
+                    this.adminTab = 'dasbor';
+                }
             }
         }
     </script>
